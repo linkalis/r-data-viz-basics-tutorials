@@ -1,0 +1,112 @@
+---
+title: "EPSY 1261 Class Assignment: Box-plots"
+author: "YOUR NAME GOES HERE"
+date: "June 22, 2016"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+  html_document:
+    fig_height: 3
+    fig_width: 5
+  word_document:
+    fig_height: 3
+    fig_width: 5
+---
+
+
+```{r include=FALSE}
+# Don't delete this chunk if you are using the mosaic package
+# This loads the mosaic and dplyr packages
+require(mosaic)
+require(natality2014)
+Birth_sample <- Natality_2014_1k
+
+```
+
+```{r include=FALSE}
+# Some customization.  You can alter or delete as desired (if you know what you are doing).
+
+# This changes the default colors in lattice plots.
+trellis.par.set(theme=theme.mosaic())  
+
+# knitr settings to control how R chunks work.
+require(knitr)
+opts_chunk$set(
+  tidy=FALSE,     # display code as typed
+  size="small"    # slightly smaller font for code
+)
+```
+
+In this class activity you will learn about box-plots. We will see the R code to make complex box-plots and summary statistics, features of the graph, and how to write about our investigations.  
+
+Recall that datasets for most of the tables, examples and exercises are available online.  See examples and hints below. 
+
+Steps to proceed:
+1) download the file `Birth_sample.Rmd` from Moodle
+2) upload the file to the RStudio server
+3) run "Knit PDF" and add in your interpretation where it is marked as SOLUTION:
+4) Make sure each person in your group has an electronic copy of the complete assignment.
+
+### PROBLEMS TO COMPLETE:
+
+#### Problem 1
+
+The **Birth_sample** dataset is from the Natality_2014_100k package. It includes data from the The Centers for Disease Control (CDC). The CDC collects data on all births registered in the US (50 states + DC).  One of the study variables is a measure of birth weight of baby (dbwt) in grams. **One pound is about 454 grams.**  
+
+We are going to explore the birth weight data with a box-plot graph and some summary statistics. Before you begin exploring the graph and numbers there are a few things to remember. First, when describing a box-plot include shape, center, spread, and outliers in the description. Second, when discussing shape determine if the distribution is skewed (median is close to one of the quartiles and the opposite whisker is longer than the whisker close to the median), symmetric (the median is located about in the middle of the box and the whiskers are about equal in length) or unrecognizable. Third, since the box-plot uses the median and quatiles in its construction we usually report the median as the measure of center and the interquartile range (IQR = Q3 - Q1) as the measure of spread.
+
+Based on the box-plot and summary statistics describe the sample size plus CENTER, SPREAD and SHAPE of this distribution, providing only a single measure of center and a single measure of spread.  Be sure to provide an interpretation in the context of the problem.
+
+```{r, fig.height=3.2}
+
+bwplot(~ dbwt, 
+  main="Figure 1: Box-plot\nof Baby weigth in gm from the CDC data", 
+  data=Birth_sample)
+
+favstats(~ dbwt, data = Birth_sample)
+```
+
+
+SOLUTION: XX ADD YOUR SOLUTION HERE XX
+
+
+
+#### Problem 2 (Birth Weight by Gender)
+
+While investigating the variable baby weight is interesting usually what drives data investigation is a curiosity, a question. I am interested in seeing if baby weight differs for male and female babies. To investigate if there is a difference in **birth weight** by **gender** we will make two box-plots, one for the birth weights of male babies and one of the birth weights of female babies. We will also generate the statistics for these two distributions.
+
+To understand if there is a difference between these two distribution we will use what we learned in problem 1 about describing box-plots and add in looking for similarities and differences in SHAPE, CENTER and SPREAD for the two groups.
+
+Compare and contrast the male and female baby weight distributions. Describe the sample sizes plus CENTER, SPREAD and SHAPE of these distribution, providing only a single measure of center and a single measure of spread for each group.  Be sure to provide an interpretation in the context of the problem (and don't forget to specify units).
+
+
+```{r, fig.height=3.2}
+
+bwplot( dbwt ~ sex, 
+  xlab="Birth Weight (in gm)", 
+  main="Figure 2: Box-plot \nof Baby weight by gender ", data=Birth_sample)
+favstats(dbwt ~ sex, data=Birth_sample)
+```
+
+
+SOLUTION: XX ADD YOUR SOLUTION HERE
+
+
+
+#### Problem 3 (Baby Weight by Gender by if mother had diabetes before pregnancy)
+
+Looking at the above box-plots and summary statistics we see only a slight difference (males are about half a pound heavier than females) in the birth weight of male and female babies. But I wonder what will happen if we also group by if the mother had diabetes before pregnancy. Look at the graphs and summary statistics below, do you see a relationship?
+
+Using what you learned in problem 1 and 2 write about this investigation.
+
+```{r, fig.height=3.2}
+
+bwplot( dbwt ~ urf_diab|sex, 
+  xlab="Birth Weight (in gm)", 
+  main="Figure 3: Box-plots comparing baby weight \nby if Mother had diabetes before pregnancy \nby gender of baby ", data=Birth_sample)
+favstats(dbwt ~ urf_diab|sex, data=Birth_sample)
+
+```
+
+SOLUTION: XX ADD YOUR SOLUTION HERE

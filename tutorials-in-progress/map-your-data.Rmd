@@ -1,0 +1,24 @@
+---
+title: "Map your data"
+author: "Alison Link"
+date: "August 3, 2016"
+output: html_document
+---
+
+http://www.unomaha.edu/mahbubulmajumder/data-science/fall-2014/lectures/06-display-spatial-data/06-display-spatial-data.html#/4
+
+
+```{r}
+install.packages("maps")
+library(maps)
+
+install.packages("ggmap")
+library(ggmap)
+
+statedata <- map_data("state")
+countydata <- map_data("county")
+
+ggplot(countydata, aes(x=long, y=lat, group=group)) + 
+  geom_polygon(fill="grey65", colour = alpha("white", 1/2), size = 0.2)
+```
+

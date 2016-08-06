@@ -1,0 +1,24 @@
+---
+title: "junk-notes"
+author: "Alison Link"
+date: "August 1, 2016"
+output: html_document
+---
+
+## Data wrangling
+
+
+#### Pro Tip {.pro-tip}
+If you plan to do any other type of wrangling--such as filter(), arrange(), mutate(), etc.--after selecting specific columns from your data, make sure you `select()` _all_ of the relevant columns in your select statement.  For example, let's say you have a data frame about players on a baseball team, and you want to filter out players who are under 21.  You will need to include the "age" variable in your `select()` statement, along with any other variables that you want to select.  If you forget to include the "age" variable, you will not be able to subsequently filter using that variable!  The "age" variable will be absent from the selected dataset and you will get an error [WHAT ERROR?].
+
+
+
+Here's a table of some of the main "data verbs", along with a description of what kind of tool they are.  We'll have a look at each of these more closely in a minute, but for now, just get a sense of the range of verbs that are available to you using dplyr:
+
+[TABLE of verbs]
+
+
+
+
+* one task requires you to figure out the difference between doing group_by() %>% arrange() and arrange() %>% group_by() -- order matters! group_by will negate arrange() if you apply arrange() first
+

@@ -1,0 +1,73 @@
+---
+title: 'A “second date" with your data in R/RStudio'
+author: "Alison Link"
+date: "June 20, 2016"
+output: 
+  html_document:
+    css: styles.css
+---
+
+***
+
+**Related to:** _Data Computing_, "Introduction to Data Graphics", Ch. 5
+
+***
+
+```{r, echo=FALSE}
+data <- read.csv("Benchmarking_Results__CY_2012_Public_Buildings.csv", header=TRUE, na.strings=c("N/A", "Not Available"))
+```
+
+## Check out some "profile pictures" of your data
+
+(In real dating, you probably would have done this earlier on in the process, but for data dating, we'll save the fun stuff for last.)
+
+
+## Look at a single variable
+
+### Boxplot
+
+[graphic with parts of boxplot labeled]
+
+If you remember the `summary()` function we looked at earlier, a boxplot is essentially a visual representation of those values--minimum, median, maximum, etc.  Here's how you create a boxplot in R:
+
+```{r}
+boxplot(data$ENERGY_STAR_score)
+```
+
+We can also group our boxplot, to examine how values vary between groups.  For example, we have a variable called "Prop\_Type" in our dataset that describes whether the building is a school, office, parking lot, etc.  Maybe we're wondering how the Energy Star rating tends to vary based on property type.  Let's group buildings with the same "Prop\_Type" together, then, and see how that changes our boxplot:
+
+```{r}
+par(las=2, mar=c(10, 4, 2, 2))
+boxplot(data$ENERGY_STAR_score ~ data$Prop_Type)
+```
+
+_Wait a minute...that boxplot looks kind of empty!_ you may be saying.  And you're right: there are clearly values on the chart that have no associated boxplot (for example: "Convention Center").  This is generally because there are not enough values in those group to be able to calculate a meaningful boxplot--there's only one Convention Center in Minneapolis, after all!  This is a good lesson: when grouping based on a variable like this, it's always good to check how many values fall into each group before plotting or doing further analysis.  If you don't have enough observations in a particular group, you will need to account for that during your analysis.  You can see how many obeservations fall in each "Prop_Type" group using the `table()` function:
+
+```{r}
+table(data$Prop_Type)
+```
+
+### Activity A {.activity}
+
+Use the `table()` function to find out: how many parking lots do we have in this dataset?  Parking lots also don't have a boxplot associated with them in the chart above.  Why do you think that is?
+
+
+### Histogram
+
+### Barchart
+
+
+
+## Look at two variables
+
+### Scatterplots
+
+
+## References
+
+City of Minneapolis. (2012). _Benchmarking Results - CY 2012 Public Buildings_ [Data set]. Retrieved from: http://opendata.minneapolismn.gov/datasets/d050496ced314752bf89763139bc0cb3_0 
+
+
+***
+
+**Acknowledgements:** Thanks to Roxanne Johnson for helping to brainstorm some of the topics in this document!

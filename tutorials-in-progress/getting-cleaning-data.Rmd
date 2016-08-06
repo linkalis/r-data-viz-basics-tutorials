@@ -1,0 +1,31 @@
+---
+title: "Getting and cleaning your data"
+author: "Alison Link"
+date: "August 3, 2016"
+output: html_document
+---
+
+## Getting data
+
+
+## NA NA NA NA
+
+Read in your data--anytime R finds a missing value, it will put an "NA".  But your data may have other ways of indicating missing values.  Examine it after it's read in to figure out if there seem to be other values that should be marked as missing values
+
+[screenshot of buildings data w/ NAs and other missing values that weren't recognized]
+
+When in doubt, add the following to cover most cases:
+```{r}
+read.csv( na.strings=c("N/A", "Not Available", "#REF!")
+```
+
+
+## Skipping lines when reading in data
+
+
+## Check the types
+
+
+## Rename variables
+
+

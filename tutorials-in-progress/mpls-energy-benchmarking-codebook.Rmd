@@ -1,0 +1,36 @@
+---
+title: "Minneapolis Energy Benchmarking Results Codebook"
+author: "Alison Link"
+date: "August 6, 2016"
+output: pdf_document
+---
+
+
+Glossary of Terms 
+Btu - British Thermal Unit 
+A unit of energy, which can represent both thermal energy and electricity. One BTU is the amount of energy required to raise one pound of water one degree Fahrenheit. These are some Btu conversions for other units of energy: 1 kWh of electricity = 3413 Btu, 1 therm of natural gas = 100,000 Btu, kBtu = 1,000 Btus, 1 mmBtu = 1,000,000 Btus 
+
+
+
+
+
+ENERGY STAR Rating 
+The 1-100 ENERGY STAR score was developed by the Environmental Protection Agency (EPA) and provides a metric for comparison with other similar buildings across the country. The score accounts for differences in climate, occupancy and operating hours. A score of 50 represents median energy performance, while a score of 75 or better indicates a building is a top performer. For more information, read How the 1-100 ENERGY STAR score is calculated. 
+  
+Energy Benchmarking 
+The process of comparing a building’s energy performance to other similar properties, based on a standard metric. ENERGY STAR Portfolio Manager was the software used to benchmark the public buildings in this report, and the metric for comparison is Energy Use Intensity (EUI). 
+ 
+Energy Use Intensity (EUI) 
+The metric used for comparing buildings in Energy Star, EUI expresses a building’s energy use relative to its size. In this report it is expressed as kBtu/ft², and is calculated by taking the total energy consumed in a year (in kBtu) and dividing it by the floor area of the building (in ft²). 
+ 
+Site EUI 
+Site energy represents the amount of heat and electricity consumed by a building as reflected in your utility bills. This is a relevant metric for facility managers, to understand how a building’s energy use has changed over time. Site EUI does not, however, account for the environmental impacts of transmission and delivery of energy. Site energy sources for public buildings in this report include: electricity, natural gas, chilled water and steam.  This report includes both the Site and Source EUI for all buildings reported. 
+
+Source EUI 
+Source energy represents the total amount of raw fuel that is required to operate the building. It incorporates all transmission, delivery, and production losses. By taking all energy use into account, the metric provides a complete assessment of energy efficiency in a building. 
+ 
+Total GHG Emissions (MtCO2e) 
+The metric used in this report for greenhouse gas emissions, which represent a million metric tons of carbon dioxide equivalents. Equivalent CO2 (CO2e) is a universal standard measurement for greenhouse gasses such as  and their ability to trap heat in the atmosphere. These greenhouse gasses include carbon dioxide, methane, nitrous oxide, and chloroflouro-carbons. Greenhouse gas emissions for buildings are calculated using the ENERGY STAR Portfolio Manager Methodology for Greenhouse Gas Inventory and Tracking Calculations. 
+ 
+Weather normalized 
+When energy use is adjusted to account year-to-year weather differences, allowing for comparison of a building to itself over time. Through this procedure, the energy in a given year is adjusted to express the energy that would have been consumed under 30-year average weather conditions.
