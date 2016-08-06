@@ -19,11 +19,13 @@ The inputs you put into functions are called **arguments**.  If you've ever take
 
 ![showing pizza ingredients and comparing them to arguments, and a pizza recipe and comparing it to a function](arg_fun_recipe.png)
 
-**Pro tip\:** A lot of the errors you'll see in R are caused when you feed the wrong types of arguments into a function.  Functions can be very picky about the type of inputs they're expecting in order to work properly.  For example, if you feed a function a column of numbers (quantitative variable) when its expecting a column of words (qualitative variable), it is likely to spit back an error message in the R console.  It's like baking cupcakes with salt instead of sugar or feeding your dog chocolate for dinner--expect something gross to come out!
+#### Pro tip: Wrong thing in, wrong thing out {.pro-tip}
+A lot of the errors you'll see in R are caused when you feed the wrong types of arguments into a function.  Functions can be very picky about the type of inputs they're expecting in order to work properly.  For example, if you feed a function a column of numbers (quantitative variable) when its expecting a column of words (qualitative variable), it is likely to spit back an error message in the R console.  It's like baking cupcakes with salt instead of sugar or feeding your dog chocolate for dinner--expect something gross to come out!
 
-Let's start by looking at some examples of simple functions that expect either one or multiple arguments so you can get a better sense of how this all fits together in R syntax.  For these examples, we'll be using a dataset describing the energy efficiency of different government and public buildings across the city of Minneapolis.
 
 ### 1-argument function example
+
+Now, let's start by looking at some examples of simple functions that expect either one or multiple arguments so you can get a better sense of how this all fits together in R syntax.  For these examples, we'll be using a dataset describing the energy efficiency of different government and public buildings across the city of Minneapolis.
 
 Simple functions like `mean()`, `sum()`, and `summary()` take a single argument in R.  The structure is generally as follows:
 

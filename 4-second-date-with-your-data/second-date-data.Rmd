@@ -90,8 +90,6 @@ A barchart is another common way of visualizing data, and is particularly useful
 ```{r}
 building_type_counts <- table(data$Prop_Type)
 barplot(building_type_counts)
-
-# show how to change plot axis ranges?
 ```
 
 
@@ -107,7 +105,8 @@ Here's how you can use a scatterplot to compare the buildings' "Year\_Built" (al
 plot(data$Year_Built ~ data$ENERGY_STAR_score)
 ```
 
-**Pro tip\:** For exploratory analysis, it's not always hugely important which variable you choose to plot as X and which you choose for Y.  You're exploring, after all, so you may not yet have a good sense of which variable you think is doing the influencing and which is doing the responding.  But for your final analyses, as you _do_ gain a stronger theory how your variables are related, try to pick the right variables for the right axes--while also recognizing that there's not always a "right" answer, and your choice is sometimes more of an art than a science.
+#### Pro tip: X or Y? Y or X? {.pro-tip}
+For exploratory analysis, it's not always hugely important which variable you choose to plot as X and which you choose for Y.  You're exploring, after all, so you may not yet have a good sense of which variable you think is doing the influencing and which is doing the responding.  But for your final analyses, as you _do_ gain a stronger theory how your variables are related, try to pick the right variables for the right axes--while also recognizing that there's not always a "right" answer, and your choice is sometimes more of an art than a science.
 
 
 ### Activity B {.activity}
