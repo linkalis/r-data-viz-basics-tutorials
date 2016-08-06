@@ -2,7 +2,7 @@
 title: "How to think in R"
 author: "Alison Link"
 date: "May 25, 2016"
-output: pdf_document
+output: html_document
 ---
 
 Let's assume you've downloaded R to your computer and are getting all excited to start down the path of learning statistical computing.  You maybe don't quite know what "statistical computing" is--other than that it sounds exciting!  So hopefully you're wondering by now: _What the heck is R?_  Let's start by looking at a really boring definition, and then pick it apart a bit:
@@ -11,7 +11,7 @@ Let's assume you've downloaded R to your computer and are getting all excited to
  
 So, what does this mean?...
 
-* **"R is a language and environment for statistical computing":** This means that R doesn't look like Excel or other spreadsheet programs you may be used to.  Instead, R looks a lot more like programming languages such as Python or Java.  Using R, you will be using functions and writing code snippets that are very similar to those used in other programming languages, but that have a special emphasis on data analysis and visualization.  (Note: Python, Java, and other programming languages also have data analysis and visualization capabilities, but they are not quite as optimized for these tasks as R is!)
+* **"R is a language and environment for statistical computing":** This means that R doesn't look like Excel or other spreadsheet programs you may be used to.  Instead, R looks a lot more like programming languages such as Python or Java.  With R, you will be using functions and writing code snippets that are very similar to those used in other programming languages, but that have a special emphasis on data analysis and visualization.  (Note: Python, Java, and other programming languages also have data analysis and visualization capabilities, but they are not quite as optimized for these tasks as R is!)
 
 * **"R is highly extensible":** This means that people can write packages for R and share them with other R users.  For example, let's say you wanted to write a package that lets people make graphs and charts that look like web comics.  You could write a packages that does that, and then share it back to the R user community for others to use.  (In fact, this [has already been done](http://xkcd.r-forge.r-project.org/)!)
 
