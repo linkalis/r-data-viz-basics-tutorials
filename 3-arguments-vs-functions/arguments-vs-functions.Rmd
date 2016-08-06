@@ -8,8 +8,7 @@ output: html_document
 **Related to:** _Data Computing_, "Functions, Arguments and Commands", p. 21; "R Command Patterns", Ch. 3
 
 ```{r, echo=FALSE}
-# Data source: http://opendata.minneapolismn.gov/datasets/d050496ced314752bf89763139bc0cb3_0
-data <- read.csv("Benchmarking_Results__CY_2012_Public_Buildings.csv", header=TRUE, na.strings = c("Not Available", "N/A"))
+data <- read.csv("mpls_benchmarking_2014.csv", header=TRUE, na.strings = c("Not Available", "N/A"))
 ```
 
 ## Functions are R's "recipes" for your data
@@ -30,10 +29,10 @@ Simple functions like `mean()`, `sum()`, and `summary()` take a single argument 
 
 ![](arg_fun_1_arg_function.png)
 
-For example, let's look at a basic summary of the 'ENERGY_STAR_score' variable in our dataset.  We can use the 1-argument function `summary()` to get a quick and dirty look at the minimum, mean, and maximum values of this variable:
+For example, let's look at a basic summary of the "energy\_star\_score" variable in our dataset.  We can use the 1-argument function `summary()` to get a quick and dirty look at the minimum, mean, and maximum values of this variable:
 
 ```{r}
-summary(data$ENERGY_STAR_score)
+summary(data$energy_star_score)
 ```
 
 ### Multiple-argument function example
@@ -41,13 +40,13 @@ summary(data$ENERGY_STAR_score)
 Once we get beyond 1-argument functions, the world of R starts getting a bit more complex.  Multiple-argument functions typically have some combination of required arguments, along with some additional optional arguments.  For example, the function `plot()` will accept two numeric arguments as inputs and create a scatterplot:
 
 ```{r}
-plot(data$Year_Built, data$ENERGY_STAR_score)
+plot(data$year_built, data$energy_star_score)
 ```
 
 The `plot()` function also allows you to add some additional optional inputs to help you style and title the plot:
 
 ```{r}
-plot(data$Year_Built, data$ENERGY_STAR_score, pch=20, main="Scatterplot of Year built vs. Emergy Star rating")
+plot(data$year_built, data$energy_star_score, pch=20, main="Scatterplot of Year built vs. Emergy Star rating")
 ```
 
 You can see we added two arguments: `pch=20` to change the style of the points on the plot, and `main="Scatterplot of Year built vs. Emergy Star rating"` to change the title of the plot.  You wouldn't _have_ to add these optional arguments, but they can help make the plot look a little nicer!
@@ -76,7 +75,7 @@ If you don't want to view your function's output right away, you can save it for
 
 **Example A: Saving the result of a table to a variable**
 ```{r}
-building_types <- table(data$Prop_Type)
+building_types <- table(data$prop_type)
 ```
 
 Did you see that?  There's a new symbol in the syntax above.  Meet...the R assignment arrow operator (<-)!  If you've ever looked at other programming languages, you may have used the equals sign (=) for similar purposes to assign a value to a variable.  (In fact, R will also let you use the equals sign (=) in cases like this, but it is not standard practice, so try to stick to the assignment arrow (<-) instead.)
@@ -85,10 +84,10 @@ Anytime you use the R assignment arrow operator (<-), the result from the right-
 
 **Example B: Making a new column**
 
-Another common scenario where assignment is used frequently is when you're creating new columns and tacking them onto your dataset.  For example, let's say you want to calculate how many years ago each building in the dataset was built by subtracting its Year\_Built from the current year.  You then want to save the result as a variable, 'years_ago', into your dataset:
+Another common scenario where assignment is used frequently is when you're creating new columns and tacking them onto your dataset.  For example, let's say you want to calculate how many years ago each building in the dataset was built by subtracting its "year\_built" from the current year.  You then want to save the result as a variable, "years\_ago", into your dataset:
 
 ```{r}
-data$years_ago <- 2016 - data$Year_Built
+data$years_ago <- 2016 - data$year_built
 ```
 
 Notice that the data didn't originally have a column called 'years\_ago'.  This got created "on the fly" when your declared it as a new column with the name 'years\_ago' on the left-hand side of the assignment.  

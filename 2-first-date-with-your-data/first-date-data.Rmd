@@ -22,7 +22,7 @@ A good strategy in these situations is to be ready to ask a lot of questions, an
 
 Before you can get introduced to your dataset, you'll first need to load it into R.  Generally, it's best to start with datasets that are in **.CSV format** before you load them into R.  CSV stands for "Comma Separated Values", and is a very simple format for raw data where each cell of the data is separated by a comma (",") and each row of data is on a new line of the file.  If you're curious, you can open up your .CSV-formatted dataset in a simple text editor (Windows: Notepad, Mac: TextEdit) to get a better sense of how it's structured.  While it's good to understand what's going on "behind the scenes" in a .CSV file, generally you won't have to actually manipulate your data when it's in this format.  When you load your data into R, the commas in your .CSV file will disappear and will instead appear more like the cells your are used to from spreadsheet programs like Excel.  
 
-For our first "data date", we'll use a sample dataset in a .CSV file called "Benchmarking_Results__CY_2012_Public_Buildings.csv".  We'll learn more about this data in a minute, but first you'll want to load your .CSV-formatted dataset into R:
+For our first "data date", we'll use a sample dataset in a .CSV file called "mpls\_benchmarking\_2014.csv".  We'll learn more about this data in a minute, but first you'll want to load your .CSV-formatted dataset into R:
 
 1. Use the **"Files"** tab in RStudio navigate to the folder where the dataset is stored.
 
@@ -37,7 +37,7 @@ b) The argument `header=TRUE`, to let R know that the dataset contains a header 
 c) (Optional:) If the data indicates that it has missing values, let R know how these missing values are signaled in the data.  This raw dataset, for example, uses both "N/A" and "Not Available" to indicate where values are missing.  We use the `na.strings` argument and give it a list (c(...)) containing both of those values so R knows to interpret them as missing data.
 
 ```{r}
-data <- read.csv("Benchmarking_Results__CY_2012_Public_Buildings.csv", header=TRUE, na.strings=c("N/A", "Not Available"))
+data <- read.csv("mpls_benchmarking_2014.csv", header=TRUE, na.strings=c("N/A", "Not Available"))
 ```
 
 When you're done typing this into the console, hit **"Enter"**, and you'll see...nothing!  Or at least, nothing very obvious.  There are two small things you should notice to tell you that your data is successfully loaded: 1) your R console will show you the prompt sign (">") letting you know that it's done processing your request and is ready for a new command; 2) in the **"Environment"** tab in RStudio, you should see your dataset's name listed, along with some basic information about how many observations (rows) and how many variables (columns) your dataset contains:
@@ -50,7 +50,7 @@ If you haven't already, now is the time to look at any **metadata** that is avai
 
 ![screenshot of Minneapolis Open Data portal metadata](metadata_example.png)
 
-This data was found on the City of Minneapolis's Open Data portal, and [from the metadata](http://opendata.minneapolismn.gov/datasets/d050496ced314752bf89763139bc0cb3_0), we learn that this dataset contains information about energy and water usage in Minneapolis public and large commercial buildings during the year 2012.  It appears that each row represents a building, and so the columns likely contain various variables relating to each building's energy and water use over the course of the year.  Let's dig in and find out a little more...
+This data was found on the City of Minneapolis's website/open data portal, and [from the metadata](http://minneapolismn.gov/environment/energy/benchmarking), we learn that this dataset contains information about energy and water usage in Minneapolis public and large commercial buildings.  We'll be focusing on a dataset that includes energy benchmarking results for public and private buildings during the year 2014.  It appears that each row represents a building, and so the columns likely contain various variables relating to each building's energy use over the course of the year.  Now, let's dig in and find out a little more...
 
 ## Ask it its names()
 
@@ -62,7 +62,7 @@ names(data)
 
 ### Activity A {.activity}
 
-Load in the sample dataset, and then run the `names(data)` command in your R console.  What variable names are present in the dataset?  What do you suspect they each mean?  (You can use the metadata to help you make an educated guess about the variable names.)  Pick 7 of the variable names, and write down a brief definition of what you think they measure/represent.
+Load in the sample dataset, and then run the `names(data)` command in your R console.  What variable names are present in the dataset?  What do you suspect they each mean?  (You can use the metadata to help you make an educated guess about the variable names.)  Pick 4 of the variable names, and write down a brief definition of what you think they measure/represent.
 
 
 ## Check out your data from head() to tail()
@@ -83,10 +83,10 @@ Or, if you simply want to view _all_ of the data at once, you can **click on you
 
 ## Sum up your data
 
-You can get a quick summary of individual variables/columns in your data using R's handy `summary()` function.  When you type the `summary()` command into the console and hit "Enter", it will spit out some basic descriptive statistics about the specific variable you want to look at.  Here, for example, we're looking at the "Year_Built" variable, which describes the years in which the buildings in our dataset were constructed:
+You can get a quick summary of individual variables/columns in your data using R's handy `summary()` function.  When you type the `summary()` command into the console and hit "Enter", it will spit out some basic descriptive statistics about the specific variable you want to look at.  Here, for example, we're looking at the "year_built" variable, which describes the years in which the buildings in our dataset were constructed:
 
 ```{r}
-summary(data$Year_Built)
+summary(data$year_built)
 ```
 
 Some of the statistics--such as minimum, mean, and maximum--should be familiar to you.  You will also see information about the following descriptive statistics:
@@ -113,10 +113,10 @@ On any decent dating site, you'll see plenty of people who talk about themselves
 We dig deeper into data types later, but for now, it doesn't hurt to practice one of the handiest "go-to" functions in R that helps you snoop out R data types: the `str()` function.  This command is short--a mere three little letters--but it's powerful!  If you're confused about a variable, or don't know what type of data it contains, this function tells you exactly how R is interpreting the information in that variable.  For example:
 
 ```{r}
-str(data$Year_Built)
+str(data$year_built)
 ```
 
-Here, we can see that R is automatically interpreting the "Year\_Built" variable to be an "int", which is shorthand for **integer**.  An "integer" is just computer programming speak for "whole number"; this can be any number, negative, positive, or zero, that does not contain a decimal.  _But how did R know this variable was an integer?!_, you may wonder.  Well, when R read in our data during the read.csv() function, R noticed a lot of whole numbers in the "Year\_Built" column and simply took its best guess about which data type was present for that variable.
+Here, we can see that R is automatically interpreting the "year\_built" variable to be an "int", which is shorthand for **integer**.  An "integer" is just computer programming speak for "whole number"; this can be any number, negative, positive, or zero, that does not contain a decimal.  _But how did R know this variable was an integer?!_, you may wonder.  Well, when R read in our data during the read.csv() function, R noticed a lot of whole numbers in the "year\_vuilt" column and simply took its best guess about which data type was present for that variable.
 
 
 ### Activity C {.activity}
