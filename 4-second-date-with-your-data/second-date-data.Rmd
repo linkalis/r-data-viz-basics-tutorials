@@ -14,7 +14,7 @@ output:
 ***
 
 ```{r, echo=FALSE}
-data <- read.csv("Benchmarking_Results__CY_2012_Public_Buildings.csv", header=TRUE, na.strings=c("N/A", "Not Available"))
+data <- read.csv("mpls_benchmarking_2014.csv", header=TRUE, na.strings=c("N/A", "Not Available"))
 ```
 
 So, now we're finally at the point where you can start visualizing your data!  The basic visualizations we'll look at here can be a helpful part of your **exploratory analysis**.  In fact, you can think of them a bit like "profile pictures" for your data: they help you understand how the data looks at various different angles.  (In real dating, you probably would have started looking at profile pictures a little earlier on in the process, but for data dating, we'll save the fun stuff for the second date.)
@@ -36,17 +36,17 @@ If you remember the `summary()` function we looked at earlier, a boxplot is esse
 
 * **minimum\:** bottom "whisker" of the box
 
-Here's how you create a boxplot in R for a single variable.  For example, let's say we want to understand more about the range of scores our buildings received on the "ENERGY\_STAR\_score" variable:
+Here's how you create a boxplot in R for a single variable.  For example, let's say we want to understand more about the range of scores our buildings received on the "energy\_star\_score" variable:
 
 ```{r}
-boxplot(data$ENERGY_STAR_score)
+boxplot(data$energy_star_score)
 ```
 
 You can also group your boxplot, to examine how values vary between groups.  For example, we have a variable called "Prop\_Type" in our dataset that describes whether the building is a school, office, parking lot, etc.  Maybe we're wondering how the Energy Star rating tends to vary based on property type.  Let's group buildings with the same "Prop\_Type" together, then, and see how that changes our boxplot:
 
 ```{r}
 par(las=2, mar=c(10, 4, 2, 2))
-boxplot(data$ENERGY_STAR_score ~ data$Prop_Type)
+boxplot(data$energy_star_score ~ data$prop_type)
 ```
 
 _Wait a minute...that boxplot looks kind of empty!_ you may be saying.  And you're right: there are clearly values on the chart that have no associated boxplot (for example: "Convention Center").  This is generally because there are not enough values in those group to be able to calculate a meaningful boxplot--there's only one Convention Center in Minneapolis, after all!  This is a good lesson: when grouping based on a variable like this, it's always good to check how many values fall into each group before plotting or doing further analysis.  If you don't have enough observations in a particular group, you will need to account for that during your analysis.  You can see how many obeservations fall in each "Prop_Type" group using the `table()` function:
