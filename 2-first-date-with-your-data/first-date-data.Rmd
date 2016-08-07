@@ -40,7 +40,7 @@ c) (Optional:) If the data indicates that it has missing values, let R know how 
 data <- read.csv("mpls_benchmarking_2014.csv", header=TRUE, na.strings=c("N/A", "Not Available"))
 ```
 
-When you're done typing this into the console, hit **"Enter"**, and you'll see...nothing!  Or at least, nothing very obvious.  There are two small things you should notice to tell you that your data is successfully loaded: 1) your R console will show you the prompt sign (">") letting you know that it's done processing your request and is ready for a new command; 2) in the **"Environment"** tab in RStudio, you should see your dataset's name listed, along with some basic information about how many observations (rows) and how many variables (columns) your dataset contains:
+When you're done typing this into the console, hit **"Enter"**, and you'll see...nothing!  Or at least, nothing very obvious.  There are two small things you should notice to tell you that your data is successfully loaded: 1) your R console will show you the prompt sign (">") letting you know that it's done processing your request and is ready for a new command; 2) in the **"Environment"** tab in RStudio, you should see your dataset's name listed, along with some basic information about how many observations (rows) and how many variables (columns) your dataset contains.  Click this dataset within your Environment to open up and preview your data in a spreadsheet-like view:
 
 ![screenshot of RStudio Environment tab with single dataset loaded](environment_tab_data_loaded.png)
 
@@ -54,7 +54,7 @@ This data was found on the City of Minneapolis's website/open data portal, and [
 
 ## Ask it its names()
 
-You can find out the names of all of the variables in the dataset using the `names()` function:
+R has a lot of convenient commands you can use to examine some basic features of your data _without_ having to open it up and preview your data.   For example, you can find out the names of all of the variables in the dataset using the `names()` function:
 
 ```{r, eval=FALSE}
 names(data)
@@ -62,7 +62,7 @@ names(data)
 
 ### Activity A {.activity}
 
-Load in the sample dataset, and then run the `names(data)` command in your R console.  What variable names are present in the dataset?  What do you suspect they each mean?  (You can use the metadata to help you make an educated guess about the variable names.)  Pick 4 of the variable names, and write down a brief definition of what you think they measure/represent.
+Load in the sample dataset, and then run the `names(data)` command in your R console.  When you run this command, R will spit out a list of 14 variable names into your R console.  What variable names are present in the dataset?  What do you suspect they each mean?  (You can use the metadata to help you make an educated guess about the variable names.)  Pick 4 of the variable names, and write down a brief definition of what you think they measure/represent.
 
 
 ## Check out your data from head() to tail()

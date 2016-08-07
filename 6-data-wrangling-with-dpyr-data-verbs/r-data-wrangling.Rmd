@@ -229,20 +229,20 @@ By now you may be wondering: _Why is "summarise" spelled with an "s" in the exam
 
 ### Activity B: More data verbs practice {.activity}
 
-Now, it's your turn to try out the dplyr tools on your own!  And this time, we'll return to the data set on energy and water usage for Minneapolis public buildings.  Make sure the .CSV file containing the data is in your R working directory, then load the dataset into your R environment:
+Now, it's your turn to try out the dplyr tools on your own!  And this time, we'll return to the data set on energy benchmarking for Minneapolis public and private buildings in the year 2014.  Make sure the .CSV file containing the data is in your R working directory, then load the dataset into your R environment:
 ```{r}
-data <- read.csv("Benchmarking_Results__CY_2012_Public_Buildings.csv", header=TRUE, na.strings=c("N/A", "Not Available", "#REF!"))
+data <- read.csv("mpls_benchmarking_2014.csv", header=TRUE, na.strings=c("NA"))
 ```
 
 Using the data you just loaded, write a command using data verbs to address each of the following tasks:
 
-1. Find the building with the **highest** Energy Star score ("ENERGY\_STAR\_score") overall.  
+1. Find the building with the **highest** Energy Star score ("energy\_star\_score") overall.  
 
-2. Group the buildings by property type, and create a new data frame showing **how many buildings** there are of each property type.
+2. Group the buildings by property type ("prop\_type"), and create a new data frame showing **how many buildings** there are of each property type.
 
-3. Group the buildings by property type, and create a new data frame showing the **average** water usage in gallons ("water\_gallons") for the buildings within each property type.
+3. Group the buildings by property type, and create a new data frame called "avg\_site\_EUI\_by\_prop\_type" showing the **average** site energy use intensity ("site_EUI") for the buildings within each property type.
 
-4. Now, we want to figure out which building has the most efficient water usage based on its floor area ("Prop\_Flr\_Area").  Create a new variable called "water\_usage\_by\_flr\_area" using the following formula: `water_usage_by_flr_area = water_gallons / Prop_Flr_Area`.  Save this variable as a new column back to the original dataset.  Then, sort the data to find out which building has the lowest water usage based on its floor area.
+4. Now, we want to figure out which building has the the lowest greenhouse gas emissions based on its floor area ("floor\_area").  Create a new variable called "GHG\_emissions\_by\_floor\_area" using the following formula: `GHG_emissions_by_floor_area = total_GHG_emissions / floor_area`.  Save this variable as a new column back to the original dataset.  Then, sort the data to find out which building has lowest the greenhouse gas emissions based on its floor area.
 
-5. Find the mean Energy Star score across _all_ of the buildings in the dataset.  (Hint: you can find this easily using one of the functions from the "first date" with your data!)  Then, filter the dataset to include _only_ buildings that were built **before** the year 1970 **_and_** that have an Energy Star score that is **greater than** the mean you just calculated.  Save this to a new data frame.  The result will be a list of buildings that are older than 1970, but that have a higher-than-average Energy Star score.
+5. Find the mean Energy Star score across _all_ of the buildings in the dataset.  (Hint: you can find this easily using one of the functions from the "first date" with your data!)  Then, filter the dataset to include _only_ buildings that were built **before** the year 1970 **_and_** that have an Energy Star score that is **greater than** the mean you just calculated.  Save this to a new data frame called "old\_efficient\_buildings".  The result will be a list of buildings that are older than 1970, but that have a higher-than-average Energy Star score.
 

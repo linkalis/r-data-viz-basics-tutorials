@@ -76,11 +76,14 @@ This is kind of similar to having a piece of cake sitting in front of you.  You 
 If you don't want to view your function's output right away, you can save it for later.  For example, for our sample dataset, let's say we want information on the types of buildings that are present in our dataset.  We can use the `table()` function with the following syntax to create a table with this information and save it for later use:
 
 **Example A: Saving the result of a table to a variable**
+
 ```{r}
 building_types <- table(data$prop_type)
 ```
 
-Did you see that?  There's a new symbol in the syntax above.  Meet...the R assignment arrow operator (<-)!  If you've ever looked at other programming languages, you may have used the equals sign (=) for similar purposes to assign a value to a variable.  (In fact, R will also let you use the equals sign (=) in cases like this, but it is not standard practice, so try to stick to the assignment arrow (<-) instead.)
+To view this table later on, you can simply type its name, "building_types" into the R Console and hit "Enter".  This will print the table into your R Console.
+
+And did you see that?  There's a new symbol in the syntax above.  Meet...the R assignment arrow operator (<-)!  If you've ever looked at other programming languages, you may have used the equals sign (=) for similar purposes to assign a value to a variable.  (In fact, R will also let you use the equals sign (=) in cases like this, but it is not standard practice, so try to stick to the assignment arrow (<-) instead.)
 
 Anytime you use the R assignment arrow operator (<-), the result from the right-hand side of the arrow gets stored under the variable name you give it on the left-hand side of the arrow.  This is stored in your computer's memory and shows up in your RStudio "Environment" tab.  Again, we can think of this "Environment" tab like a giant refrigerator where you can stash away all of your R objects until you're ready to use them.  So at this point, the 'building_types' table is saved in your R environment and is ready to use later on during your analysis.
 
@@ -94,7 +97,7 @@ data$years_ago <- 2016 - data$year_built
 
 Notice that the data didn't originally have a column called 'years\_ago'.  This got created "on the fly" when your declared it as a new column with the name 'years\_ago' on the left-hand side of the assignment.  
 
-This new variable gets appended to the data frame, so you won't actually see it as a separate object showing up in the "Environment" tab.  Instead, it's simply tacked on silently at the end of your table.  You should see, however, that the "Environment" tab displays that the number of varibles in your dataset has increased each time you create a new variable and assign it to a new column:
+This new variable gets appended to the data frame, so you won't actually see it as a separate object showing up in the "Environment" tab.  Instead, it's simply tacked on silently at the end of your data frame.  You should see, however, that the "Environment" tab displays that the number of varibles in your dataset has increased each time you create a new variable and assign it to a new column:
 
 ![](arg_fun_env_datavars.png)
 

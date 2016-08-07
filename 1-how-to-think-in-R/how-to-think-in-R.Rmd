@@ -2,7 +2,7 @@
 title: "How to think in R"
 author: "Alison Link"
 date: "May 25, 2016"
-output: pdf_document
+output: html_document
 ---
 
 Let's assume you've downloaded R to your computer and are getting all excited to start down the path of learning statistical computing.  You maybe don't quite know what "statistical computing" is--other than that it sounds exciting!  So hopefully you're wondering by now: _What the heck is R?_  Let's start by looking at a really boring definition, and then pick it apart a bit:

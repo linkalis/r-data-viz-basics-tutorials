@@ -91,6 +91,10 @@ ggplot(data, aes(x=year_built, y=energy_star_score)) +
   ylab("Emergy Star score")
 ```
 
+Rotate axis labels:
+```{r}
+theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
 
 
 ## Glyphs: Your graphical "toppings"
@@ -122,11 +126,12 @@ ggplot(data, aes(x=year_built, y=energy_star_score)) +
 Some glyphs, such as `geom_boxplot()` require a categorical variable for the "x" aesthetic, and a continuous variable for the "y" aesthetic:
 
 ```{r}
-ggplot(public_buildings, aes(x=org_name, y=site_EUI)) +
+ggplot(data, aes(x=org_name, y=site_EUI)) +
   geom_boxplot()
 
-ggplot(public_buildings, aes(x=org_name, y=site_EUI)) +
-  geom_violin()
+ggplot(data, aes(x=prop_type, y=site_EUI)) +
+  geom_violin() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
 ```
 
 
@@ -185,9 +190,9 @@ For each plot, write a 1-2 sentence description explaining what the plot is demo
 
 
 ```{r}
-ggplot(data, aes(x=Total_GHG)) +
+ggplot(data, aes(x=total_GHG_emissions)) +
   geom_histogram() +
-  facet_wrap( ~ Prop_Type)
+  facet_wrap( ~ prop_type)
 ```
 
 
