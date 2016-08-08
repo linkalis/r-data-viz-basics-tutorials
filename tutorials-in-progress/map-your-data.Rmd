@@ -1,8 +1,10 @@
 ---
 title: "Map your data"
 author: "Alison Link"
-date: "August 3, 2016"
-output: html_document
+output: 
+  html_document:
+    css: styles.css
+    fig_caption: false
 ---
 
 http://www.unomaha.edu/mahbubulmajumder/data-science/fall-2014/lectures/06-display-spatial-data/06-display-spatial-data.html#/4

@@ -1,0 +1,111 @@
+---
+title: "Color your data"
+author: "Alison Link"
+output: 
+  html_document:
+    css: styles.css
+    fig_caption: false
+---
+
+Sometimes you want to add a little splash of color to your graphic--kind of like adding a little bit of "special sauce" to a subway sandwich.  Colors are useful if you want to add additional emphasis to one of the relationships in your graphic, or add an additional variable to the relationships already being displayed in your graphic.
+
+Generally, you can add color to your plot by simply adding a `col=variable_name` or `fill=variable_name` argument to your aesthetics when you're setting up the plot:
+
+![sketch of ggplot aesthetics with color setting added inside of aesthetics](ggplot_color.png)
+
+
+#### Pro tip: `col=` or `fill=`? {.pro-tip}
+
+There are two different aesthetics that affect your graphic's color: `col` and `fill`.  Each of them has a slightly different effect, and it may take a bit of trial and error before you learn which one is most appropriate for which glyphs.
+
+In general, `col` is what you should use if want to add colors to the points on a scatterplot, or to the outline of your glyphs.  And `fill` is what you should use if you want to fill in colors on a boxplot, violin plot, or other plot that has fillable geometric shapes.  Here's a quick table that summarized when you should use `col` and when you should use `fill`:
+
+Plot type    | `col` effect                            | `fill` effect
+------------ | --------------------------------------- | ----------------------------------------
+boxplot      | adds color to **outline** of each boxplot | adds color to **inside** of each boxplot
+histogram    | adds color to the **outline** of each bar in histogram | adds color to **inside** of each bar in histogram
+barchart     | adds color to **outline** of each bar   | adds color to the **inside** of each bar
+scatterplot  | colors the points in the scatterplot    | N/A 
+
+Sometimes it's hard to remember if your glyph requires you to ues `col=` or `fill=` inside of your ggplot aesthetics.  If aren't sure which one to use, you can always simply try both and see which one works best!
+
+
+## Colors for categorical variables
+
+Colors can be used to illustrate categorical variables.  For example, for our buildings dataset, we can add an additional dimension to the plot of "year\_built" vs. "energy\_star\_score" that shows points color-coded based on which organization the building belongs to:
+```{r}
+ggplot(data, aes(x=year_built, y=energy_star_score, col=org_name)) +
+  geom_point()
+```
+
+If you don't like ggplot's default colors, you can also define your own **custom colors** to use in your graphic.  Simply add `scale_colour_manual(values = c())` to your plot to choose custom colors to use with a categorical variable.  Just make sure you have the same number of color values as you do categories within your variable.  For example, the "org\_name" variable has 5 different categories within it, so we can manually assign each of these categories a distinct color as follows:
+
+```{r}
+ggplot(data, aes(x=year_built, y=energy_star_score, col=org_name)) +
+  geom_point() +
+  scale_colour_manual(values = c("red", "orange", "yellow", "green", "blue"))
+```
+
+#### Pro tip: R's color options {.pro-tip}
+
+R has a built-in color palette of 657 unique colors you can use when creating your graphics.  Run the following command to print the names of all of R's built-in colors to the console.  You can use any of these colors when choosing custom colors for your color scales:
+```{r, echo=FALSE}
+colors()
+```
+
+R will also recognize **hex colors**.  Hex colors are a way of combining numbers together to define a broad palette of colors.  They are called "hex" colors, because the numbers used to define them are **hexadecimal** numbers.  The hexadecimal counting system start similarly to the decimal (base 10) system, but adds a few additional "numbers" to create a base _16_ system.  For example, here's how to count from 0 to 15 in hexadecimal: `0, 1, 2, 3, 4, 5, 6, 7, 8, 9, a, b, c, d, e, f`
+
+Hex colors, then, are colors that combine hexadecimal numbers together to create specific colors:
+
+[graphic of how to break down a hex color into R, G, B]
+
+Hex colors are commonly used for web design and digital graphic design.  You can use online tools like [Color Hex](http://www.color-hex.com/) and or [HTML Color Codes](http://htmlcolorcodes.com/) to pick out palettes of hex colors.  To learn more about hex colors and the theory behind them, check out [this article from Smashing Magazine](https://www.smashingmagazine.com/2012/10/the-code-side-of-color/).  
+
+
+## Colors for continuous variables
+
+Colors can also be used to illustrate continuous variables.  For example, we can add an additional dimension to the plot of "year\_built" vs. "energy\_star\_score" that color-codes the points based on the buildings' greenhouse gas emissions ("total\_GHG\_emissions") :
+
+```{r}
+ggplot(data, aes(x=year_built, y=energy_star_score, col=total_GHG_emissions)) +
+  geom_point()
+```
+
+The plot above shows which buildings in the dataset have high greenhouse gas emissions levels.  Buildings with high greenhouse gas emissions are colored light blue, and buildings with low emissions are colored dark blue.  At first glance, this default color scheme may be a little confusing, though!  Intuitively, we might expect that _dark_ blue should signal high emissions, and _light_ blue should signal low emissions.  That way, the more saturated color represents a higher saturation of greenhouse gas emissions, and vice-versa.
+
+So, to invert the color scheme, you simply need to add a `scale_colour_continuous()` option as follows:
+
+```{r}
+ggplot(data, aes(x=year_built, y=energy_star_score, col=total_GHG_emissions)) +
+  geom_point() +  
+  scale_colour_continuous(trans = 'reverse')
+```
+
+And again, if you don't like ggplot's default colors, you can also define your own **custom colors** to use for categorical variables.  This time, instead of selecting a specific set of colors, you need to select two options--a color that you want to represent the _lower_ values of your varible, and a color that you want to represent the _higher_ values.  This will define the **color gradient** used in your plot.  Your color, when plotted, will fade from the low end of the color scale you've selected to the high end.  
+
+Let's see it in action!  We'll mark buildings where the greenhouse gas emissions are _low_ in green (`#00ff00`) and we'll mark points with high greenhouse gas emissions in red (`#ff0000).  You should see that there are at least two buildings in the dataset that have markedly high greenhouse gas emissions (red points), and there are a small number of buildings that have missing values for their greenhouse gas emissions (grey points):
+```{r}
+ggplot(data, aes(x=year_built, y=energy_star_score, col=total_GHG_emissions)) +
+  geom_point() +
+  scale_colour_continuous(low = "#00ff00", high ="#ff0000")
+```
+
+
+## Fill with colors
+
+If you're using colors on a boxplot, violin plot, or other plot that has shapes that need to be filled, use the `fill=` argument, rather than the `col=` argument.  (Note: Sometimes it's hard to remember if your glyph requires you to ues `col=` or `fill=` inside of your ggplot aesthetics.  If aren't sure which one to use, simply try both and see which one works best!)
+
+```{r}
+ggplot(data, aes(x=org_name, y=energy_star_score, fill=org_name)) +
+  geom_boxplot()
+```
+
+## Custom colors
+
+Use the `scale_fill_manual(values = c())` to define custom colors for categorical variables in filled plots:
+
+```{r}
+ggplot(data, aes(x=org_name, y=energy_star_score, fill=org_name)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("darkred", "red", "orange", "yellow", "green", "seagreen", "blue", "violet", "purple", "purple4"))
+```

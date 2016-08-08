@@ -22,3 +22,27 @@ Here's a table of some of the main "data verbs", along with a description of wha
 
 * one task requires you to figure out the difference between doing group_by() %>% arrange() and arrange() %>% group_by() -- order matters! group_by will negate arrange() if you apply arrange() first
 
+
+
+
+
+### Pro tip: Axis Scales
+
+You've probably also noticed that, because the X values for "total\_GHG\_emissions" are so large, the labels for the X axis are formatted using scientific notation.  This may be confusing to an audience viewing your graphic.  To change these labels, and format them using the more familiar comma-separated notation instead, you can install the "scales" package:
+
+```{r, eval=FALSE}
+install.packages("scales")
+```
+
+Then, load the scales library and recreate the graphic, this time adding the `labels = comma` argument to the X and Y scales:
+
+```{r}
+library(scales)
+
+ggplot(data, aes(x=floor_area, y=total_GHG_emissions)) +
+  geom_point() +
+  scale_x_continuous(limits=c(0, 2000000), labels = comma) +
+  scale_y_continuous(limits=c(0, 15000), labels = comma)
+```
+
+**BONUS:** In addition to `labels = comma`, the "scales" package also supports `labels = percent` for formatting percentages and `labels = dollar` for formatting dollar values.
