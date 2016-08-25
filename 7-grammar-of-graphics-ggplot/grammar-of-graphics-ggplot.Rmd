@@ -33,9 +33,9 @@ After ggplot is successfully installed, every time you want to use it, just make
 library(ggplot2)
 ```
 
-And before we get started making some graphics, let's load up the data set on energy and water usage for Minneapolis public buildings.  Make sure the .CSV file containing the data is in your R working directory, then load the dataset into your R environment:
+And before we get started making some graphics, let's load up the Minneapolis buildings energy benchmarking dataset.  Make sure the .CSV file containing the data is in your R working directory, then load the dataset into your R environment:
 ```{r}
-data <- read.csv("mpls_benchmarking_2014.csv", header=TRUE, na.strings=c("NA"))
+data <- read.csv("../datasets/mpls_energy_benchmarking_2014.csv", header=TRUE, na.strings=c("NA", "Not Available", "N/A", "#REF!"))
 ```
 
 #### Pro tip: Why "ggplot2"? {.pro-tip}
@@ -60,14 +60,14 @@ The "aesthetics" parameters can be a little confusing at first, so pay attention
 
 * **y** : the response ("y") variable you want to plot
 
-Some graphics only need a single "x" value in the aesthetic.  For example, here's the frame for a plot that looks at one variable--the site energy use intensity ("site\_EUI") of the various buildings in our dataset:
+Some graphics only need a single "x" value in the aesthetic.  For example, here's the frame for a plot that looks at one variable--the site energy use intensity (EUI) ("site\_EUI") of the various buildings in our dataset:
 ```{r}
 ggplot(data, aes(x=site_EUI))
 ```
 
-Some graphics need both an "x" and a "y" value in the aesthetic.  For example, here's the frame for a plot comparing the year a building was built (explanatory variable) to its Energy Star score (response variable):
+Some graphics need both an "x" and a "y" value in the aesthetic.  For example, here's the frame for a plot comparing the year a building was built (explanatory variable) to its site EUI (response variable):
 ```{r}
-ggplot(data, aes(x=year_built, y=energy_star_score))
+ggplot(data, aes(x=year_built, y=site_EUI))
 ```
 
 #### Pro tip: Customize your axis labels {.pro-tip}
@@ -75,18 +75,18 @@ ggplot(data, aes(x=year_built, y=energy_star_score))
 ggplot will automatically try to label your graphic's X and Y axes based on your variable names.  But to create a cleaner, more readable plot, you can also easily add your own axis labels to your graphic's frame.  Use `xlab()` to set your graphic's X label, use `ylab()` to set your graphic's Y label, and use `ggtitle()` to set the main title of your graphic:  
 
 ```{r}
-ggplot(data, aes(x=year_built, y=energy_star_score)) +
+ggplot(data, aes(x=year_built, y=site_EUI)) +
   xlab("Year built") + 
-  ylab("Energy Star score") +
-  ggtitle("Scatterplot of year built vs. Energy Star scores for Mpls. buildings (2014)")
+  ylab("Site energy use intensity (EUI)") +
+  ggtitle("Scatterplot of year built vs. site EUI for Mpls. buildings (2014)")
 ```
 
 And sometimes, your X axis labels can get long and cumbersome, or simply look better with a little bit of rotation.  To rotate your X axis labels, simply add a `theme()` setting.  Inside of your `theme()`, set the `angle` of the x axis text (for example, we'll try 45 degrees).  Also set the text's horizontal justification (`hjust`) equal to 1, so your x axis labels bump up directly against the bottom of your plot:
 ```{r}
 ggplot(data, aes(x=year_built, y=energy_star_score)) +
   xlab("Year built") + 
-  ylab("Energy Star score") +
-  ggtitle("Year built vs. Energy Star scores for Mpls. buildings (2014)") +
+  ylab("Site energy use intensity (EUI)") +
+  ggtitle("Scatterplot of year built vs. site EUI for Mpls. buildings (2014)") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
@@ -101,7 +101,7 @@ But first, there are two main questions you need to answer about your data befor
 
 * **Is my X variable _continuous_, or is my X variable _categorical_?**  
 
-**Continuous variables** are variables like numeric or integer variables that can take any possible value along a number line.  For example, in our buildings dataset, "year\_built", "site\_EUI" and "energy\_star\_score" are all continuous variables. **Categorical variables** are usually character or factor variables, where the variable can only take a values within a specific set of categories.  For example, in our buildings dataset, "prop\_type" and "org\_name" are categorical values because they can each only take values that fall within a specific set of categories: there are only 30 possible property type values, and 5 organizations present in the dataset.
+**Continuous variables** are variables like numeric or integer variables that can take any possible value along a number line.  For example, in our buildings dataset, "year\_built", "site\_EUI" and "energy\_star\_score" are all continuous variables. **Categorical variables** are usually character or factor variables, where the variable can only take a values within a specific set of categories.  For example, in our buildings dataset, "prop\_type" and "organization" are categorical values because they can each only take values that fall within a specific set of categories: there are only 30 possible property type values, and 5 organizations present in the dataset.
 
 Some glyphs work with a single, continuous X variable. For example, you can use the `geom_histogram()` glyph type to examine the site energy use intensity ("site\_EUI") of the buildings in our dataset, which is a continuous numeric variable. Set up the frame using "site\_EUI" as the "x" aesthetic, then use the `geom_histogram()` glyph to add a histogram to the graphic:
 
@@ -111,10 +111,10 @@ ggplot(data, aes(x=site_EUI)) +
 ```
 
 
-Some glyphs require both an X and Y variable.  For example, you can use the `geom_point()` glyph to take the buildings' "year\_built" as an explanatory variable and compare it to the buildings' "energy\_star\_score" values as a response variable. Set up the frame using the "year\_built" as the "x" aesthetic, and "energy\_star\_score" as the "y"" aesthetic.  Then, use the `geom_point()` glyph to add points to the graphic to create a scatterplot:
+Some glyphs require both an X and Y variable.  For example, you can use the `geom_point()` glyph to take the buildings' "year\_built" as an explanatory variable and compare it to the buildings' "site\_EUI" values as a response variable. Set up the frame using the "year\_built" as the "x" aesthetic, and "site\_EUI" as the "y"" aesthetic.  Then, use the `geom_point()` glyph to add points to the graphic to create a scatterplot:
 
 ```{r, warning=FALSE, message=FALSE}
-ggplot(data, aes(x=year_built, y=energy_star_score)) +
+ggplot(data, aes(x=year_built, y=site_EUI)) +
   geom_point()
 ```
 
@@ -122,7 +122,7 @@ ggplot(data, aes(x=year_built, y=energy_star_score)) +
 Some glyphs, such as `geom_boxplot()` require a categorical variable for the "x" aesthetic, and a continuous variable for the "y" aesthetic:
 
 ```{r, warning=FALSE, message=FALSE}
-ggplot(data, aes(x=org_name, y=site_EUI)) +
+ggplot(data, aes(x=organization, y=site_EUI)) +
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
@@ -147,7 +147,8 @@ Sometimes when you're examining various variables in your dataset, you'll notice
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 ggplot(data, aes(x=floor_area, y=total_GHG_emissions, col=ifelse(floor_area > 2000000 | total_GHG_emissions > 20000, TRUE, FALSE))) +
   geom_point() +
-  scale_colour_manual(name="", values = setNames(c('red','black'), c(TRUE, FALSE)))
+  scale_colour_manual(name="", values = setNames(c('red','black'), c(TRUE, FALSE))) +
+  theme(legend.position = "none")
 ```
 
 In the plot above, there are a handful of observations, marked in red, that represent outliers.  These are buildings that either have _very_ large floor areas, _very_ high greenhouse gas emissions, or both.  These values are interesting, and are worth looking into more in a separate analysis.  But for now, they seem to be skewing the plot so that a large number of observations are crowded into the lower left-hand corner of the plot.  With the majority of the observations crowded together like this, it makes it harder to see what trend is going on across the majority of the buildings in the dataset.
@@ -184,8 +185,6 @@ ggplot(data, aes(x=total_GHG_emissions)) +
 ```
 
 
-
-
 ### Activity B: Putting together graphics using frames, glyphs, and facets {.activity}
 
 #### Exercise 1
@@ -198,7 +197,7 @@ Make a graphic with the following features:
 
 * Facet: "public\_private"
 
-Note: If you're having trouble reading the labels, you may also want to adjust the angle of the X axis label text.  Remember, you can add the following to rotate the X axis label text: `theme(axis.text.x = element_text(angle = 45, hjust = 1))`
+Note: If you're having trouble reading the labels, you may also want to adjust the angle of the X axis label text.  Remember, you can add the following argument to your ggplot to rotate the X axis label text: `theme(axis.text.x = element_text(angle = 45, hjust = 1))`
 
 Now, answer the following questions:
 
@@ -224,3 +223,5 @@ Now, answer the following questions:
 1. Compare the property type "Parking" with the property type "Office".  Which of these two property types appears to have lower site energy use intensity, in general?  (For example, if we picked a random parking lot and a random office building from the dataset, which of them would likely have the lower site energy use intensity?)
 
 2. Which property type appears to have to broadest range in site energy use intensity?  (Remember that "range" is the difference between the maximum and the minimum values in a group of values.)
+
+3. Let's say you are part of a company reponsible for building a new worship facility in the city of Minneapolis. You have a lot of different options about the kinds of materials to use in construction, some of which are more energy efficient than others.   Your main goal is to make sure your building's site energy use intensity (EUI) ("site\_EUI") is similar to other worship facilities within the city.  When making decisions about which materials to use in the construction, what site EUI range should you aim for so that your building falls within the standard range for worship facilities?

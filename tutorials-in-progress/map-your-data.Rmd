@@ -7,6 +7,9 @@ output:
     fig_caption: false
 ---
 
+https://cran.r-project.org/web/packages/ggmap/ggmap.pdf
+
+
 http://www.unomaha.edu/mahbubulmajumder/data-science/fall-2014/lectures/06-display-spatial-data/06-display-spatial-data.html#/4
 
 
@@ -24,3 +27,6 @@ ggplot(countydata, aes(x=long, y=lat, group=group)) +
   geom_polygon(fill="grey65", colour = alpha("white", 1/2), size = 0.2)
 ```
 
+
+
+https://www.r-bloggers.com/batch-geocoding-with-r-and-google-maps/

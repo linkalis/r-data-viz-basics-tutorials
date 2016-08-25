@@ -1,3 +1,6 @@
 *.html
 .dropbox
 Icon.
+datasets/
+extras/
+*.csv

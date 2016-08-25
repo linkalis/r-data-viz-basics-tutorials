@@ -7,26 +7,37 @@ output:
     fig_caption: false
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+Check: Simple time series w/o reshaping?
+
+
+## rbind & cbind
+
+#### Pro tip: Long vs. wide data {.pro-tip}
+
+ggplot tends to do best with long data
+
+
+## Left join
+
+[VENN DIAGRAM]
+
+
+#### Pro tip: Multi-column unique identifiers {.pro-tip}
+
+If you don't have a single column you can use as an identifier, you may be able to combine multiple columns together to make a unique identifier.  For example, if you're joining a dataset with information on different cities in the U.S., and let's say you have a variable called "city\_name" that lists the name of each city in your dataset.  You will likely quickly discover that there are, unfortunately, _a lot_ of cities with the same name.  For example, there's a "Minneapolis" in Minnesota, but there's also a "Minneapolis" in Kansas.  And there are enough "Springfield"s across the U.S. that it's fueled [years of debate about where the Simpson family's true home is](http://www.dailymail.co.uk/news/article-2127965/The-Simpsons-Real-location-Springfield-revealed-creator-Matt-Groening.html).  The "city_name" variable alone, then, does not make for a very good unique identifier.
+
+If you can combine you "city\_name", however, with additional information about the county and state where it is located, you are much more likely to have a unique identifier.  Let's say, then, that each of your datasets also has variables called "county" and "state".  You can match on the combination of "city\_name", "county", and "state" as follows:
+```{r}
+by=c()
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
-```
 
-## Including Plots
+## Outer join
 
-You can also embed plots, for example:
+[VENN DIAGRAM]
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
