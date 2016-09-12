@@ -1,21 +1,28 @@
 ---
 title: "R data structures & types"
 author: "Alison Link"
-date: "May 27, 2016"
-output:
-  pdf_document: default
+date: "September 2016"
+output: 
   html_document:
-    css: styles.css
+    css: ../styles/styles.css
+    fig_caption: false
 ---
+
+### Objectives {.objectives}
+
+* Understand how R holds information in spreadsheet-like **data frames** that are comprised of **vectors**
+
+* Understand R's five basic data types--**character, numeric, integer, logical, factor**--the formal structures R uses to hold data values.  Get a sense of which types of values each data type is best used for.
+
+* Create a data frame "from scratch" by creating vectors containing different data types and combining them into a single data frame
+
 
 ***
 
 **Related to:** _Data Computing_ p. 29
 
-***
 
-
-## 1) Data structures: The "building blocks" of R
+## Data structures: The "building blocks" of R
 
 ### Data frames
 
@@ -39,9 +46,11 @@ This may look a little strange at first--especially since the vector appears hor
 Try to visualize in your mind how this single vector, when turned vertially and combined with other vectors, can fit within a larger data frame.  A data frame is simply multiple vectors/variables stacked next to each other vertically!  This may sound a little abstract for now, but we'll look at an example in a minute that should help clarify how vectors come together to make a data frame.  But first, we need to understand: _What goes **inside of** our vectors?_
 
 
-## 2) Data types: The "flavors" of data
+## Data types: The "flavors" of data
 
-Each vector has a different "flavor"--or **data type**--that describes what kind of information the vector/variable holds.  Data types in R are important, because they affect what types of analyses you can perform on each variable.  For example, it's not too hard to create a scatterplot or histogram containing information about the "Year\_Built" variable you encountered in the Minneapolis buildings energy efficiency dataset, since scatterplots and histograms are both visual displays that are appropriate for **numeric** data.  But how would you plot data about, say, the _names_ of each building in our dataset?  Names are **character** data type, so they wouldn't make sense in a histogram or scatterplot--you'd need to use an alternative visualization, like a wordcloud.
+Each vector has a different "flavor"--or **data type**--that describes what kind of information the vector/variable holds.  Data types in R are important, because they affect what types of analyses you can perform on each variable.  For example, it's not too hard to create a scatterplot or histogram containing information about the "year\built" variable you encountered in the Minneapolis buildings energy efficiency dataset, since scatterplots and histograms are both visual displays that are appropriate for **numeric** data.  
+
+But how would you plot data about, say, the _names_ of each building in our dataset?  Names are **character** data type, so they wouldn't make sense in a histogram or scatterplot--you'd need to use an alternative visualization, like a wordcloud.
 
 To help understand the different data types used in R, let's take an example: let's say you're organizing a baseball tournament, and you need to keep track of information about participants in your tournament.  Here are examples of each of the main data types in R, along with an example or two of variables that fall within that data type that might be relevant for your baseball tournament: 
 
@@ -58,11 +67,11 @@ R data type     | What type of data does it contain? | Example
 For each of the data types in the table above, come up with at least one other example of a variable that falls within that data type.  Sometimes it's not completely clear what data type a variable best fits within, which means you'll need to make a reasonable judgement call.  Explain your choices, where necessary.
 
 
-## 3) Putting it together: Make your own data frame!
+## Putting it together: Make your own data frame!
 
 Now, let's say you want to format all of the information for your hypothetical baseball tournament into an R data table.  Let's construct a data frame from scratch containing all of the information on the players in your tournament.  _Note:_ It's very rare that you would have to create a data table from scratch like this--in general, you're more likely to have to _pick apart_ a data table into its component vectors during a data analysis!  Think of this exercise, then, as essentially "working backwards" to help you understand the inner workings of data tables and the vectors they contain so you can pick them apart more effectively during data analyses.
 
-Creating a vector is pretty straightforward: you need to wrap the vector in `c()`, which is a way of telling R to "join these things together into a vector!".  And then, within each vector, you need to separate out your data values using commas (,).  For character or factor vectors, you also need to surround each data value with quotation marks (""):
+Creating a vector is pretty straightforward: you need to wrap the vector in `c()`, which is a way of telling R to "join these things together into a vector!".  And then, within each vector, you need to separate out your data values using commas (",").  For character and most factor vectors, you also need to surround each data value with quotation marks ("").  Let's create several vectors of different data types, each of which holds various pieces of information about 5 of the players in the tournament:
 
 ```{r}
 # Character vector
@@ -81,14 +90,6 @@ vegetarian <- c(TRUE, FALSE, FALSE, TRUE, FALSE)
 tshirt_size <- factor(c("L", "XL", "S", "S", "M"), levels=c("S", "M", "L", "XL"))
 ```
 
-The only difference you should have noticed among the vectors above is that the **factor vector** requires one extra piece of information: it needs you to add some information about the _levels_ for the variable.  This is because R isn't smart enough to know much about t-shirt sizes, so you need to tell it which size represents the smallest t-shirt and which size represents the largest.  If we don't add any information about these "levels", R will simply assume an alphabetical ordering, which means it will assume that t-shirts come in sizes "L", "M", "S", "XL"--in that order!  To help avoid this confusion, you need to directly specify the order of the levels for ordered categorial variables.  
-
-Also note that behind the scenes, R is secretly splitting this factor into to parts: 1) a text value ("S", "M", "L", "XL"); 2) a number (1, 2, 3, 4) representing the numeric order each of these values.  If you run the `str()` function on this vector, you can get a sense of what's going on under the surface:
-
-```{r}
-str(tshirt_size)
-```
-
 Now that you have several vectors of different data types containing information on your baseball tournament players, you're ready to combine these variables into a data frame:
 
 ```{r}
@@ -97,12 +98,23 @@ baseball_tournament_df <- data.frame(player_name, player_weight, player_age, veg
 
 Your baseball tournament data frame should now be saved into your R "Environment" tab in RStudio.  Click on it to make sure it's formatted correctly and looks like a table full of data!
 
+
+#### Pro tip: Factors are special {.pro-tip}
+The only difference you should have noticed among the vectors above is that the **factor vector** requires one extra piece of information: it needs you to add some information about the _levels_ for the variable.  This is because R isn't smart enough to know much about t-shirt sizes, so you need to tell it which size represents the smallest t-shirt and which size represents the largest.  If we don't add any information about these "levels", R will simply assume an alphabetical ordering, which means it will assume that t-shirts come in sizes "L", "M", "S", "XL"--in that order!  To help avoid this confusion, you need to directly specify the order of the levels for ordered categorial variables.  
+
+Also note that behind the scenes, R is secretly splitting this factor into to parts: 1) a text value ("S", "M", "L", "XL"); 2) a number (1, 2, 3, 4) representing the numeric order each of these values.  If you run the `str()` function on this vector, you can get a sense of what's going on under the surface:
+
+```{r}
+str(tshirt_size)
+```
+
+
 ### Activity B: Create your own data frame {.activity}
 
 Now that you've made a sample data frame based on baseball tournament participant data, create another sample data frame for a topic of your choice.  Include at least one of each of the 5 vector types mentioned above.
 
 
-## 4) Converting between data types
+## Converting between data types
 
 Sometimes there are situations where you'll want to _convert_ vectors of data into different data types.  For example, when reading in data using `read.csv()`, R sometimes guesses wrong when automatically selecting data types for the variables in your data frame.  This is one of the most common reasons you may need to convert your vectors into different data types.  And unfortunately, you may not even notice this at first!  Generally, it takes a few strange error messages before you figure out that something has gone awry.  
 

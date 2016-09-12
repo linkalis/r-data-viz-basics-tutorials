@@ -1,17 +1,25 @@
 ---
 title: 'A "first date" with your data in R/RStudio'
 author: "Alison Link"
-date: "June 5, 2016"
+date: "September 2016"
 output: 
   html_document:
-    css: styles.css
+    css: ../styles/styles.css
+    fig_caption: false
 ---
+
+### Objectives {.objectives}
+
+* Learn how to read data from a .CSV file into R and view it in RStudio
+
+* Practice basic R functions to examine the size of a dataset and run basic summary statistics on its variables
 
 ***
 
 **Related to:** _Data Computing_, "Tidy Data", p. 9; "Files and Documents", Ch. 4; "Introduction to Data Graphics", p. 47-48
 
-***
+
+## Exploratory analysis is like a blind date
 
 Sometimes working with a new dataset can feel a little bit like being on a blind date.  You may be a little nervous, because you're not totally sure what your data's deal is.  You may not totally trust it at first, or you may wonder if it's missing certain pieces of information you really care about.  This is good--it's always good to start with healthy skepticism when approaching a new dataset!
 
@@ -22,22 +30,16 @@ A good strategy in these situations is to be ready to ask a lot of questions, an
 
 Before you can get introduced to your dataset, you'll first need to load it into R.  Generally, it's best to start with datasets that are in **.CSV format** before you load them into R.  CSV stands for "Comma Separated Values", and is a very simple format for raw data where each cell of the data is separated by a comma (",") and each row of data is on a new line of the file.  If you're curious, you can open up your .CSV-formatted dataset in a simple text editor (Windows: Notepad, Mac: TextEdit) to get a better sense of how it's structured.  While it's good to understand what's going on "behind the scenes" in a .CSV file, generally you won't have to actually manipulate your data when it's in this format.  When you load your data into R, the commas in your .CSV file will disappear and will instead appear more like the cells your are used to from spreadsheet programs like Excel.  
 
-For our first "data date", we'll use a sample dataset in a .CSV file called "mpls\_benchmarking\_2014.csv".  We'll learn more about this data in a minute, but first you'll want to load your .CSV-formatted dataset into R:
+For our first "data date", we'll use a sample dataset in a .CSV file called "mpls\_energy\_benchmarking\_2015.csv".  We'll learn more about this data in a minute, but first you'll want to load your .CSV-formatted dataset into R:
 
 1. Use the **"Files"** tab in RStudio navigate to the folder where the dataset is stored.
 
 2. Once you are in the folder and can see your data file listed in the "Files" tab, click the **"More"** settings option, then select **"Set As Working Directory"**. Your working directory should now be set to be the same folder where the dataset is located on your computer.
 
-3. Now, you can use a handy function, `read.csv()`, that lets you easily load a .CSV file into R.  In your R console, type in the read.csv() function command, along with a few arguments: 
-
-a) The name of your file, surrounded by quotation marks ("")
-
-b) The argument `header=TRUE`, to let R know that the dataset contains a header row featuring names for each variable/column in the data
-
-c) (Optional:) If the data indicates that it has missing values, let R know how these missing values are signaled in the data.  This raw dataset, for example, uses both "N/A" and "Not Available" to indicate where values are missing.  We use the `na.strings` argument and give it a list (c(...)) containing both of those values so R knows to interpret them as missing data.
+3. Now, you can use a handy function, `read.csv()`, that lets you easily load a .CSV file into R.  In your R console, type in the read.csv() function command, along with a few arguments: a) The name of your file, surrounded by quotation marks (""); b) The argument `header=TRUE`, to let R know that the dataset contains a header row featuring names for each variable/column in the data; c) An argument called `na.strings` that lists out all values in the original data file that represent missing values (for example: in this dataset, any cell that contains the value "N/A", "Not Available", "NA", or "0" is considered to be a missing value).
 
 ```{r}
-data <- read.csv("mpls_benchmarking_2014.csv", header=TRUE, na.strings=c("N/A", "Not Available"))
+data <- read.csv("../datasets/mpls_energy_benchmarking_2015.csv", header=TRUE, na.strings=c("N/A", "Not Available", "NA", "0"))
 ```
 
 When you're done typing this into the console, hit **"Enter"**, and you'll see...nothing!  Or at least, nothing very obvious.  There are two small things you should notice to tell you that your data is successfully loaded: 1) your R console will show you the prompt sign (">") letting you know that it's done processing your request and is ready for a new command; 2) in the **"Environment"** tab in RStudio, you should see your dataset's name listed, along with some basic information about how many observations (rows) and how many variables (columns) your dataset contains.  Click this dataset within your Environment to open up and preview your data in a spreadsheet-like view:
@@ -46,11 +48,9 @@ When you're done typing this into the console, hit **"Enter"**, and you'll see..
 
 ## Read your data's "bio"
 
-If you haven't already, now is the time to look at any **metadata** that is available for your dataset.  Metadata is simply data that provides information about other data.  It's essentially the equivalent of an online dating profile for your dataset--it tells you the "big picture" overview of what your data's all about, and sometimes gives you some specifics about the different variables that are present in the dataset.  For example, the metadata of our dataset looks like this:
+If you haven't already, now is the time to look at any **metadata** that is available for your dataset.  Metadata is simply data that provides information about other data.  It's essentially the equivalent of an online dating profile for your dataset--it tells you the "big picture" overview of what your data's all about, and sometimes gives you some specifics about the different variables that are present in the dataset.
 
-![screenshot of Minneapolis Open Data portal metadata](metadata_example.png)
-
-This data was found on the City of Minneapolis's website/open data portal, and [from the metadata](http://minneapolismn.gov/environment/energy/benchmarking), we learn that this dataset contains information about energy and water usage in Minneapolis public and large commercial buildings.  We'll be focusing on a dataset that includes energy benchmarking results for public and private buildings during the year 2014.  It appears that each row represents a building, and so the columns likely contain various variables relating to each building's energy use over the course of the year.  Now, let's dig in and find out a little more...
+This data was found on the City of Minneapolis's website, and [from the metadata](http://www.minneapolismn.gov/environment/energy/benchmarking), we learn that this dataset contains information about energy and water usage in Minneapolis public and large private commercial buildings.  We'll be focusing on a dataset that includes energy benchmarking results for these buildings during the year 2015.  It appears that each row represents a building, and so the columns likely contain various variables relating to each building's energy use over the course of the year.  Now, let's dig in and find out a little more...
 
 ## Ask it its names()
 
@@ -83,7 +83,7 @@ Or, if you simply want to view _all_ of the data at once, you can **click on you
 
 ## Sum up your data
 
-You can get a quick summary of individual variables/columns in your data using R's handy `summary()` function.  When you type the `summary()` command into the console and hit "Enter", it will spit out some basic descriptive statistics about the specific variable you want to look at.  Here, for example, we're looking at the "year_built" variable, which describes the years in which the buildings in our dataset were constructed:
+You can get a quick summary of individual variables/columns in your data using R's handy `summary()` function.  When you type the `summary()` command into the console and hit "Enter", it will spit out some basic descriptive statistics about the specific variable you want to look at.  Here, for example, we're looking at the "year\_built" variable, which describes the years in which the buildings in our dataset were constructed:
 
 ```{r}
 summary(data$year_built)
@@ -91,7 +91,7 @@ summary(data$year_built)
 
 Some of the statistics--such as minimum, mean, and maximum--should be familiar to you.  You will also see information about the following descriptive statistics:
 
-* **Median\:** This is a measure of the "center" value of the variable, but it's calculated a bit differently from the mean.  If you line up all of the values for the variable in order from lowest to highest, and then take turns crossing off the lowest and highest values from each end of the line, the value you land on in the middle is the "median".  Sometimes the median can be a better measure of center compared to the mean--particularly when there are big outliers--abnormally large or abnormally small values--present in the data.
+* **Median\:** This is a measure of the "center" value of the variable, but it's calculated a bit differently from the mean.  If you line up all of the values for the variable in order from lowest to highest, and then take turns crossing off the lowest and highest values from each end of the line, the value you land on in the middle is the "median".  Sometimes the median can be a better measure of center compared to the mean--particularly when there are big outliers--i.e. abnormally large or abnormally small values--present in the data.
 
 * **1st quartile\:** If you divide your variable's values into quarters with equal number of values in each portion, then the 1st quartile is the highest value in the lower quarter of your variable's values.  25% of the full set of values will be less than the 1st quartile value, and 75% of the values will be greater than the 1st quartile value.  You can think of this as a kind of dividing line between value that are "below average" and values that are "way below average".
 
@@ -103,7 +103,7 @@ Some of the statistics--such as minimum, mean, and maximum--should be familiar t
 
 Pick a different variable in the dataset and run the summary() command on it.  What do you see?  What are the minimum, mean, and maximum values?  What are the 1st quartile, median, and 3rd quartile values? Are there any missing values?  How can you tell?
 
-Bonus: We've talked about the "1st quartile" and the "3rd quartile"...what is another name for the "2nd quartile"?
+**Bonus:** We've talked about the "1st quartile" and the "3rd quartile"...what is another name for the "2nd quartile"?
 
 
 ## Learn your data's types
@@ -116,7 +116,7 @@ We dig deeper into data types later, but for now, it doesn't hurt to practice on
 str(data$year_built)
 ```
 
-Here, we can see that R is automatically interpreting the "year\_built" variable to be an "int", which is shorthand for **integer**.  An "integer" is just computer programming speak for "whole number"; this can be any number, negative, positive, or zero, that does not contain a decimal.  _But how did R know this variable was an integer?!_, you may wonder.  Well, when R read in our data during the read.csv() function, R noticed a lot of whole numbers in the "year\_vuilt" column and simply took its best guess about which data type was present for that variable.
+Here, we can see that R is automatically interpreting the "year\_built" variable to be an "int", which is shorthand for **integer**.  An "integer" is just computer programming speak for a "whole number"; this can be any number, negative, positive, or zero, that does not contain a decimal.  _But how did R know this variable was an integer?!_, you may wonder.  Well, when R read in our data during the read.csv() function, R noticed a lot of whole numbers in the "year\_built" column and simply took its best guess about which data type was present for that variable.
 
 
 ### Activity C {.activity}
@@ -126,12 +126,6 @@ Pick a different variable in the dataset and run the `str()` command on it.  Wha
 Also note that R sometimes guesses **wrong** about the type of data it thinks is contained in a variable/column.  For the variable you selected, does it seem like R guessed correctly, or did it pick a data type that seems wrong based on your understanding of what the variable is supposed to be measuring?
 
 
+### Acknowledgements
 
-## References
-
-City of Minneapolis. (2012). _Benchmarking Results - CY 2012 Public Buildings_ [Data set]. Retrieved from: http://opendata.minneapolismn.gov/datasets/d050496ced314752bf89763139bc0cb3_0 
-
-
-***
-
-**Acknowledgements:** Thanks to Roxanne Johnson for helping to brainstorm some of the topics in this document!
+Thanks to Roxanne Johnson for helping to brainstorm some of the topics in this document!

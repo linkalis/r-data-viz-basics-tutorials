@@ -8,6 +8,12 @@ pre, code {
   word-break: break-all;*/
 }
 
+.objectives {
+  background-color: #EBEBEB;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
 .activity{
   background-color: #EEF2B8;
   padding: 10px;

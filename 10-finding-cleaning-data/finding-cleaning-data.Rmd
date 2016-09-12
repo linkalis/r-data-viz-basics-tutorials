@@ -1,0 +1,182 @@
+---
+title: "Find and clean your data"
+author: "Alison Link"
+date: "September 2016"
+output: 
+  html_document:
+    css: ../styles/styles.css
+    fig_caption: false
+---
+
+### Objectives {.objectives}
+
+* Walk through the entire data acquisition and cleaning process: be able to find data from a dataset repository, clean up irregularities in the dataset, accurately detect missing values, rename variables, and convert variables between data types, if necessary
+
+* Address some of the most common pitfalls encountered when cleaning up a new dataset before analysis
+
+* Be able to look at a dataset and tell if it's "tidy"; also understand the difference between "long" (aka "narrow") and "wide" data formats
+
+***
+
+**Related to:** _Data Computing_, "Tidy Data", Ch. 1; "From Strings to Numbers", p. 131; "Factors or Strings?", p. 133; "Wide versus Narrow Data Layouts", Ch. 11
+
+
+## Find yourself some data
+
+The first step to embarking on your own data visualization adventure is to find some interesting data!  Fortunately, this shouldn't be _too_ tricky.  In recent years, there has been increased attention to making data "open" across organizations and levels of government--from city, to state, to national-level data.  This is good news for you, because it means it is becoming easier and easier to find interesting datasets online!
+
+Here are a few places you can look for datasets that may be interesting to analyze and visualize:
+
+* [Data.gov](https://www.data.gov/) - Data.gov provites a single, nationa-level portal that allows you to search for public datasets submitted from government organizations across the U.S.
+
+* [United States Census Bureau, American FactFinder](http://factfinder.census.gov) - FactFinder is the Census Bureau's tool to help you search for and download Census data.  Try searching for the most recent "American Community Survey, 5-year estimates" to acceess data on a wide variety of social topics.
+
+* [Minnesota State Demographic Center](http://mn.gov/admin/demography/) - A website that makes it easy to access Census and other datasets about families, the economy, education, health, immigration, poverty, and other interesting data about the people of Minnesota.
+
+* [Minnesota Open Data](http://www.state.mn.us/opendata/) - A website that consolidates links to other Minnesota-based governmental organizations that may have datasets of interest.
+
+* [Hennepin County Open GIS Data](http://gis.hennepin.opendata.arcgis.com/) - Features a variety of datasets, generally including some geographic/GIS component, that are available for download.
+
+* [Open Data Minneapolis](http://opendata.minneapolismn.gov/) - Minneapolis' open data portal featuring a range of datasets, also generally including some geographic/GIS component, that are available for download.
+
+
+## Tidy up your data
+
+When dealing with a new dataset, you will first want to make sure the data is in a "tidy" format.  For example, here is a dataset that is not very "tidy".  On the surface, it may _look_ pretty, but it is currently in a format that is impossible for R to manage.  Notice how it has irregularly-shaped columns and rows, and several header lines:
+
+![screenshot of untidy dataset with multiple heading rows, cells that span multiple columns, and time series information arranges side-by-side](untidy_data.png)
+
+If you run into a dataset like this, you may need to use a spreadsheet program like Microsoft Excel or Open Office to cut and paste your data into a tidier format before reading it into R.  To make your dataset "tidy", do the following:
+
+1. **Make sure the cells of your data are shaped as a regular rectangular array**, with exactly one cell present for every row and column.  Eliminate irregularly-shaped cells that span multiple columns or rows.
+
+2. **Fix your column names.**  Column names must start with a letter, and be sure to avoid using special characters ("&", "$", "#", "@", "!") when naming columns.
+
+3. If your data contains **time series information** (years, months, etc.), format the data so that each time period has its own, full set of rows that contain values for each observation of interest.  This is what we call a "long" or "narrow" data format.  (Note: In general, this "long" format results in a lot of data rows, and may not seem very compact as a result.  This is why a lot of data providers prefer to provide time series data in "wide" format.  When creating data visualizations, however, ggplot generally works best with "long" format data, so be sure to restructure your data before reading it into R to make it easier to visualize your data using ggplot.)
+
+4. Make sure your dataset is saved as a .CSV file.  If your dataset came in an Excel (.XLSX) or other format, you will need to choose **File** > **Save As...** > then select **Comma Separated Values (.csv)** as your format.
+
+When you're done, you should end up with a dataset that is tidy and ready to be read into R:
+
+![screenshot of tidy dataset with clean column names, regularly-shaped cells, and a full set of rows for each time period in the dataset](tidy_data.png)
+
+And here's an example of a time series plot we can make with this dataset using ggplot.  You can see that it was definitely worth the effort to clean up this data!
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+
+tidy_data <- read.csv("tidy_data_example.csv", header=TRUE)
+
+ggplot(tidy_data, aes(x=year, y=percent_with_severe_housing_problems, col=race_ethnicity)) +
+  geom_line()
+```
+
+
+#### Pro tip: Don't space out! {.pro-tip}
+You may notice that R doesn't like spaces in variable names.  In fact, every time R encounters a space (" ") in a variable name, it will insert a period (".") in its place.  In general, whenever you're using programming languages like R, it's a good practice to avoid using spaces within variable names, as most programming languages don't support spaces as part of variable names.  Instead, you can substitute underscores ("_") for spaces or use camel case variable names (ex: "variableName", "anotherVariableName") instead.
+
+
+
+## Skip lines when reading in data, if necessary
+
+Sometimes datasets may already be tidy, but they simply come with a few extra lines of information at the top of the dataset that you don't need.  For example, here's a dataset that contains a few lines of junk at the top.  This will confuse R if we try to read it in directly:
+
+![screenshot of dataset with two header rows](multiple_header_rows.png)
+
+One option is to delete these extra lines using a spreadsheet program like Microsoft Excel or Open Office.  _Or_, if you want to save yourself a step, you can simply skip these lines when reading in your data in R.  To skip lines, you can use the `read.csv()` function, but add an argument called `skip` indicating the number of lines to skip when R starts reading in your dataset:
+
+```{r, eval=FALSE}
+data <- read.csv("name_of_file.csv", header=TRUE, skip=2)
+```
+
+
+## NA NA NA NA NA NA NA NA...Batman!
+
+```{r, echo=FALSE, eval=FALSE}
+na_dataset <- read.csv("../datasets/na_dataset.csv", header=TRUE)
+
+na_dataset <- read.csv("../datasets/na_dataset.csv", header=TRUE, na.strings=c("NA", "N/A", "Not Available", "#VALUE!", "#REF!"))
+```
+
+When dealing with a new dataset, you _always_ need to make sure to figure out: **How does the dataset indicate missing values**?  There are lots of different ways datasets can signal which values are missing.  Conventions can vary a lot across datasets, and even between variables in the _same_ dataset!  So, whenever you encounter a new dataset, you need to go on a quick sleuthing mission to find the missing values.  Here's an easy process to get you started:
+
+1. Use the `read.csv()` function to read in your data.  Anytime R finds a cell that is empty or a cell that contains the characters "NA", it will add an "NA" to the corresponding cell as it is being read into R.  
+
+2. Once the dataset is read in, look at it by clicking on its name in the "Environment" tab in RStudio.  **Scroll through the dataset to see if there are any additional missing value indicators that R couldn't detect by default.**  For example, sometimes datasets use "N/A", "Not Available", "#VALUE!", or other ways of indicating where values are missing.  R will not find these by default.  For example, have a look at this dataset with a lot of missing values.  In this dataset, it looks like one column has missing values that were recognized correctly, but the other columns' missing values _were not_ properly recognized:
+
+![screenshot of dataset with lots of missing values not recognized by R](na_dataset.png)
+
+3. Make a note of these additional strings that indicate missing values.  **Next, run the `read.csv()` function again, this time adding a new argument: `na.strings`.**  Use this `na.strings` argument to list each of these additional missing value strings so R knows to interpret these as "NA" when reading in the data: 
+
+```{r, eval=FALSE}
+data <- read.csv("name_of_file.csv", header=TRUE, na.strings=c("NA", "N/A", "Not Available", "#VALUE!", "#REF!"))
+```
+
+4. **Examine your dataset again.  This time, all missing values should be listed as "NA".**  These values should be also greyed out when viewing them in RStudio to indicate that R is properly interpreting these as missing values.  Here's the sample dataset again, this time with properly-recognized missing values:
+
+![screenshot of dataset with all missing values recognized by R as NAs](na_dataset_after.png)
+
+
+
+## Rename variables
+
+Sometimes, your dataset may include very long and cumbersome variable names.  If this happens, you may be tempted to open up a spreadsheet program like Microsoft Excel or Open Office and start changing the names in your original data file.  But wait!  It is often a better idea to change your variable names _after_ your read the data into R.  This is a good practice to establish a reproducible workflow.  **Reproduciblility** is one important goal of a good data analysis; this simply means that you make sure to use R code to document each step of your analysis so that it is easy to backtrack and follow the steps you took at each turn.  
+
+Imagine, for example, that you altered your variable names by editing them directly in Excel, changing each column name to something very simple (for example: "V1", "V2", "V3", etc.).  While it might seem helpful to simplify in this way, it also means that you are deleting some of the information that is contained in the variable name.  Then let's say that, down the road, your share your dataset and analysis with someone who is unfamiliar with the data.  Without the original variable names, they may find it difficult to trace the context of your data and will scratch their heads at what "V1", "V2", and "V3" could possibly stand for!
+
+Instead, keep your original dataset and its variable names intact, and simply change the variable names _after_ you read your data into R.  Then, when writing subsequent R code, you can use these new, more convenient variable names--all without compromising the integrity of the original dataset.
+
+It's very simple to change the names of your data's columns after your dataset is loaded into R.  Simply use the `names()` function, and assign to it a concatenated list `c()` of each of your new variable names, separated by commas:
+```{r, eval=FALSE}
+names(data) <- c("new_name_var_1", "new_name_var_2", "new_name_var_3", ...)
+```
+
+The process above reassigns the names for _all_ of the variables in the dataset.  So, when reassigning names this way, you need to make sure that your list contains a variable name for _each_ column in the dataset.  If your dataset has 20 columns, for example, then your list must contain 20 variable names, all separated by commas.
+
+You can also be a bit more selective if you only want to change the name for _specific_ columns in your dataset.  To change the name of a _single_ column in your dataset, simply find the number of the column you wish to change and put it in brackets ("[]") next to the `names()` argument.  (Note: Columns in R are automatically numbered from left to right starting with the number 1.)  Then, assign to it a new variable name wrapped in quotes ("").  For example, to change the name of the third column, you could do the following:
+```{r, eval=FALSE}
+names(data)[1] <- "new_name_var_1"
+names(data)[2] <- "new_name_var_2"
+names(data)[3] <- "new_name_var_3"
+```
+
+
+## Check data types for each variable
+
+There is one final step you should take in your data "quality check" before you embark on your data analysis: check to make sure R has assigned the right data type to each column in your dataset.  R's `read.csv()` command does its best to guess the right data type for each column as its reading in the data, but it's never 100% perfect.  To fix R's mistakes, make sure to go through each variable with the `str()` command and check its data type.  Or, for a quicker overview, click the expand arrow next to your dataset name in your R "Environment" tab to check the data type for each variable in the dataset:
+
+![screenshot of dataset expanded in RStudio "Environment" tab w/ variable names and types listed](check_data_types.png)
+
+You should see that variables with decimal numbers are listed as numeric ("num"); variables with whole numbers, such as years or ages, should be listed as integers ("int").  Variables that are unique strings for each row, such as names and addresses, should be listed as character ("chr") variables.  Other categorical variables should generally be listed as factor ("Factor") _or_ character ("chr") variables.
+
+If you notice that any of your variables seems to be the wrong data type, you can change it very easily using one of the following conversion functions:
+```{r, eval=FALSE}
+# Change the variable "column_name" in dataset "data" to a character variable
+data$column_name <- as.character(data$column_name)
+
+# Change the variable "column_name" in dataset "data" to a numeric variable
+data$column_name <- as.numeric(data$column_name)
+
+# Change the variable "column_name" in dataset "data" to an integer variable
+data$column_name <- as.integer(data$column_name)
+
+# Change the variable "column_name" in dataset "data" to a factor variable
+data$column_name <- as.factor(data$column_name)
+```
+
+#### Pro tip: Too many factors! {.pro-tip}
+You may notice with some datasets that a lot of your columns tend to get read in as factor variables.  This is a common issue with datasets that contain a lot of character strings (such as names) and categorical variables.  By default, R will try to read in any variable that looks like a **string**--i.e. variables that contain letters and punctuation characters--as factor variables.  In some cases, treating all strings as factors won't make sense as a default.  
+
+If R is treating a column or your data a factor variable when it really should be interpreted as a _character_ variable, you will likely quickly encounter unexpected warnings, or get weird errors in your R console that you aren't expecting.  If this is the case, try converting your factor variables into character variables and see if it resolves the issue.  One simple way to do this is to add the `stringsAsFactors = FALSE` argument as you read in your dataset.  Adding this optional setting  when reading in your data forces R to change its default behavior and treat all string variables as **character** variables instead of **factor** variables:
+```{r, eval=FALSE}
+data <- read.csv("name_of_file.csv", header=TRUE, stringsAsFactors=FALSE)
+```
+
+
+## Resources and references
+
+* Open Knowledge International. (2016). "What is Open?". Retrieved from: https://okfn.org/opendata/
+
+* U.S. Department of Housing and Urban Development, American Housing Survey Office of Policy Development. (2011). "Housing problems - verified" [Data file]. Retrieved from: "My Brother's Keeper Key Statistical Information on Boys and Men of Color". (2014). _Data.gov_ Data Catalog. https://catalog.data.gov/dataset/my-brothers-keeper-key-statistical-indicators-on-boys-and-men-of-color
+
+* Wickham, H. (2014). "Tidy Data". _The Journal of Statistical Software_, Vol 59. Retrieved from: http://vita.had.co.nz/papers/tidy-data.html

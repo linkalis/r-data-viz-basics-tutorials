@@ -1,23 +1,34 @@
 ---
 title: 'A “second date" with your data in R/RStudio'
 author: "Alison Link"
-date: "June 20, 2016"
+date: "September 2016"
 output: 
   html_document:
-    css: styles.css
+    css: ../styles/styles.css
+    fig_caption: false
 ---
+
+### Objectives {.objectives}
+
+* Produce some basic visualizations (boxplots, histograms, barcharts, and scatterplots) for exploratory analysis using base R functions
+
+* Understand which type of basic visualization is most appropriate to use when addressing various questions you might have about a dataset
 
 ***
 
 **Related to:** _Data Computing_, "Introduction to Data Graphics", Ch. 5
 
-***
+
+
+## Time to check out your data's "profile pictures"!
+
+Now we're finally at the point where you can start visualizing your data!  The basic visualizations we'll look at here can be a helpful part of your **exploratory analysis**.  In fact, you can think of them a bit like "profile pictures" for your data: they help you understand how the data looks at various different angles.  (In real dating, you probably would have started looking at profile pictures a little earlier on in the process, but for data dating, we'll save the fun stuff for the second date.)
+
+So, let's start by reading in the data:
 
 ```{r, echo=FALSE}
-data <- read.csv("mpls_benchmarking_2014.csv", header=TRUE, na.strings=c("N/A", "Not Available", "NA"))
+data <- read.csv("../datasets/mpls_energy_benchmarking_2015.csv", header=TRUE, na.strings=c("N/A", "Not Available", "NA", "0"))
 ```
-
-So, now we're finally at the point where you can start visualizing your data!  The basic visualizations we'll look at here can be a helpful part of your **exploratory analysis**.  In fact, you can think of them a bit like "profile pictures" for your data: they help you understand how the data looks at various different angles.  (In real dating, you probably would have started looking at profile pictures a little earlier on in the process, but for data dating, we'll save the fun stuff for the second date.)
 
 
 ## Boxplot: The classic "downward camera angle selfie" profile pic
@@ -48,6 +59,8 @@ You can also group your boxplot, to examine how values vary between groups.  For
 boxplot(data$energy_star_score ~ data$org_name)
 ```
 
+If your plot is too small to view in RStudio, or if it looks like parts of the plot are scrunched together, you can click the **"Zoom"** button directly above the plot to open up a new window with a zoomed-in version of the plot.  One the zoom window is open, you can also stretch and shrink the size of the window to stretch and shrink the plot.
+
 Looking at the plot above, it seems that Hennepin County buildings tend to have higher Energy Star scores than any of the other groups of buildings.  _But wait a minute...that boxplot has an empty space in it!_ you may be saying.  And you're right: the "Minneapolis Park and Recreation Board" has no associated boxplot in the chart you just created.  This could be for one of two reasons: 1) there are not enough building observations within the "Minneapolis Park and Recreation Board" group to able to calculate a meaningful boxplot, or 2) there are missing values ("NA") within the group.  In general, you need _two or more non-missing values for each group in your dataset_ in order to create a boxplot for each group.  If this isn't the case, your grouped boxplot will be missing values.  So, let's try to figure out what is going on.  
 
 First, you can use the `table()` function to check to see how many buldings in the dataset fall within each "org\_name" group:
@@ -56,7 +69,7 @@ First, you can use the `table()` function to check to see how many buldings in t
 table(data$org_name)
 ```
 
-After you run the command above, you should see that there are 48 buildings that are affiliated with the "Minneapolis Park and Recreation Board".  That _should_ be enough to create a boxplot, so clearly there is something else going on.  Next, you can view your data by clicking on the name of your dataset from the **"Environment"** tab inside of RStudio.  This will open up a preview tab where you can view the data.  Click the sort arrows next to "org\_name" to sort your data based on the "org\_name" variable:
+After you run the command above, you should see that there are 49 buildings that are affiliated with the "Minneapolis Park and Recreation Board".  That _should_ be enough to create a boxplot, so clearly there is something else going on.  Next, you can view your data by clicking on the name of your dataset from the **"Environment"** tab inside of RStudio.  This will open up a preview tab where you can view the data.  Click the sort arrows next to "org\_name" to sort your data based on the "org\_name" variable:
 
 ![screenshot of data preview tab in RStudio with column sort arrows](sort_data_preview.png)
 
@@ -83,7 +96,7 @@ For example, let's say we want to understand more about the shape of the distrib
 hist(data$energy_star_score)
 ```
 
-You can see above that the data appears somewhat multimodal--or just generally kind of distorted, with more observations near the low end and the high end of the histogram.  It is not a nice, smooth curve that peaks in the middle.  Again, you can use the `table()` function to understand a little more about what's going on.  Looking at the results of `table`, you can get a count of how many observations in the dataset fall under each particular score:
+You can see above that the data appears somewhat multimodal--or just generally kind of distorted, with more observations near the very low end and the mid- to high end of the histogram.  It is not a nice, smooth curve that peaks in the middle.  Again, you can use the `table()` function to understand a little more about what's going on.  Looking at the results of `table`, you can get a count of how many observations in the dataset fall under each particular score:
 
 ```{r}
 table(data$energy_star_score)
@@ -94,7 +107,7 @@ You can also count the number of rows in the data set that have a missing value 
 sum(is.na(data$energy_star_score))
 ```
 
-You can see, then, that a total of 143 buildings in the dataset are missing an Energy Star score.  That means that over half of the buildings on the dataset do not have an Energy Star score, and will not be included in the Energy Star score histogram you just plotted!  This is important to keep in mind as you're analyzing your data; the presence of this many missing values is something you should make sure to mention when writing up any kind of report or analysis about the buildings' Energy Star scores. 
+You can see, then, that a total of 189 buildings in the dataset are missing an Energy Star score.  That means that around half of the buildings on the dataset do not have an Energy Star score, and will not be included in the Energy Star score histogram you just plotted!  This is important to keep in mind as you're analyzing your data; the presence of this many missing values is something you should make sure to mention when writing up any kind of report or analysis about the buildings' Energy Star scores. 
 
 
 ## Barchart: The pic wearing formal attire
@@ -124,7 +137,9 @@ Here's how you can use a scatterplot to compare the buildings' "year\_built" (al
 plot(data$energy_star_score ~ data$year_built)
 ```
 
-Now, looking at the plot above, you can see that there _does not_ appear to be a strong relationship between the year the buildings were built and their respective Energy Star scores.  Newer buildings _do not_ seem to have consistently higher scores than older buildings.  In fact, there are many new buildings with low Energy Star scores, and plenty of older buildings with high Energy Star scores.  Scatterplots, then, are a nice way to test theories you may have about the relationship between different variables and help you decide which theories to reject, and which theories are worth examining in further analysis.
+Now, looking at the plot above, you can see that there _does not_ appear to be a strong relationship between the year the buildings were built and their respective Energy Star scores.  Newer buildings _do not_ seem to have consistently higher scores than older buildings.  In fact, there are many new buildings with low- or mid-range Energy Star scores, and plenty of older buildings with high Energy Star scores.  Part of this could be due to the large number of missing values in the "energy\_star_\score" variable, as noted above.  For example, it is possible that buildings that would be prone to earning lower Energy Star scores choose not to get an Energy Star ranking in the first place, or choose not to report their scores when being surveyed for this dataset.
+
+Scatterplots, then, may surprise you by revealing unexpected relationships--or _lack_ of relationships--between variables.  Use scatterplots as a nice way to test theories you may have about the relationship between different variables and help you decide which theories to reject, and which theories are worth examining in further analysis.
 
 #### Pro tip: X or Y? Y or X? {.pro-tip}
 If you're having trouble figuring out which variable to choose as X and Y in the example above, just try to reverse the question: does it seem likely that a building's Energy Star score could _change_ or _influence_ the year that a building was built?  No--this is clearly not possible!  Buildings are built whenever they're built, and the resulting Energy Star score, then, may or may not be influenced by the building's age.  So the year built should act as the explanatory (X) variable, and the Energy Star score becomes the response (Y) variable.
@@ -140,16 +155,11 @@ In general, you should look at plots as a way to help you start answering questi
 
 2. In approximately what year was the oldest building in the dataset built?  The newest building?
 
-3. Is there a relationship between the amount of floor area in a building ("floor\_area") and its greenhouse gase emissions ("total\_GHG\_emissions")?
+3. Is there a relationship between the amount of floor area in a building ("floor\_area") and its greenhouse gas emissions ("total\_GHG\_emissions")?
 
 4. When it comes to site energy use intensity ("site_EUI"), does the dataset tend to have buildings that fall towards the extremes of the spectrum (i.e. many buildings with extremely high or extremely low site energy use intensity measures)?  Or do most buildings in the dataset fall somewhere in the middle?
 
 
-## References
+### Acknowledgements
 
-City of Minneapolis. (2012). _Benchmarking Results - CY 2012 Public Buildings_ [Data set]. Retrieved from: http://opendata.minneapolismn.gov/datasets/d050496ced314752bf89763139bc0cb3_0 
-
-
-***
-
-**Acknowledgements:** Thanks to Roxanne Johnson for helping to brainstorm some of the topics in this document!
+Thanks to Roxanne Johnson for helping to brainstorm some of the topics in this document!

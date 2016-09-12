@@ -8,6 +8,18 @@ pre, code {
   word-break: break-all;*/
 }
 
+.objectives {
+  background-color: #EBEBEB;
+  padding: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.back-link {
+  display: block;
+  float: right;
+}
+
 .activity{
   background-color: #EEF2B8;
   padding: 10px;

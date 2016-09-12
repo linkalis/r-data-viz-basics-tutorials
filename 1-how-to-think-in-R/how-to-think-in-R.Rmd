@@ -1,9 +1,27 @@
 ---
 title: "How to think in R"
 author: "Alison Link"
-date: "May 25, 2016"
-output: html_document
+date: "September 2016"
+output:
+  html_document:
+    css: ../styles/styles.css
+    fig_caption: false
 ---
+
+
+### Objectives {.objectives}
+
+* Understand some of the background behind the open source project R
+
+* Learn to avoid some common difficulties that first-time R users tend to encounter
+
+* Start transitioning away from "spreadsheet"-style thinking and into "R"-style problem-solving
+
+
+[<-- Back to Table of Contents](../index.html){.back-link}
+
+
+## Getting started
 
 Let's assume you've downloaded R to your computer and are getting all excited to start down the path of learning statistical computing.  You maybe don't quite know what "statistical computing" is--other than that it sounds exciting!  So hopefully you're wondering by now: _What the heck is R?_  Let's start by looking at a really boring definition, and then pick it apart a bit:
 
@@ -11,13 +29,13 @@ Let's assume you've downloaded R to your computer and are getting all excited to
  
 So, what does this mean?...
 
-* **"R is a language and environment for statistical computing":** This means that R doesn't look like Excel or other spreadsheet programs you may be used to.  Instead, R looks a lot more like programming languages such as Python or Java.  Using R, you will be using functions and writing code snippets that are very similar to those used in other programming languages, but that have a special emphasis on data analysis and visualization.  (Note: Python, Java, and other programming languages also have data analysis and visualization capabilities, but they are not quite as optimized for these tasks as R is!)
+**"R is a language and environment for statistical computing":** This means that R doesn't look like Excel or other spreadsheet programs you may be used to.  Instead, R looks a lot more like programming languages such as Python or Java.  Using R, you will be using functions and writing code snippets that are very similar to those used in other programming languages, but that have a special emphasis on data analysis and visualization.  (Note: Python, Java, and other programming languages also have data analysis and visualization capabilities, but they are not quite as optimized for these tasks as R is!)
 
-* **"R is highly extensible":** This means that people can write packages for R and share them with other R users.  For example, let's say you wanted to write a package that lets people make graphs and charts that look like web comics.  You could write a packages that does that, and then share it back to the R user community for others to use.  (In fact, this [has already been done](http://xkcd.r-forge.r-project.org/)!)
+**"R is highly extensible":** This means that people can write packages for R and share them with other R users.  For example, let's say you wanted to write a package that lets people make graphs and charts that look like web comics.  You could write a packages that does that, and then share it back to the R user community for others to use.  (In fact, this [has already been done](http://xkcd.r-forge.r-project.org/)!)
 
-* **"R is available as Free Software":** This means that there is essentially a large, global group of geeks who is responsible for maintaining and distributing the R software and the various packages that are available for R.  This group is called [CRAN](https://cran.r-project.org/)--the "Comprehensive R Archive Network"--and they distribute the R software to you and other students and scientists around the world for free!  If you have already downloaded R onto your computer, you probably got the software from their website.  R is the result of a massive amount of collaboration and coordination between data geeks around the world!
+**"R is available as Free Software":** This means that there is essentially a large, global group of geeks who is responsible for maintaining and distributing the R software and the various packages that are available for R.  This group is called [CRAN](https://cran.r-project.org/)--the "Comprehensive R Archive Network"--and they distribute the R software to you and other students and scientists around the world for free!  If you have already downloaded R onto your computer, you probably got the software from their website.  R is the result of a massive amount of collaboration and coordination between data geeks around the world!
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(xkcd)
 
 # fake exponential growth dataframe
@@ -140,7 +158,7 @@ When you're Googling, you may notice that some of the same websites consistently
 * Quick-R: (http://www.statmethods.net/)
 
 
-### Activity A {.activity}
+### Activity A: Practice your R vocabulary {.activity}
 
 Here is some R-related vocabulary that can be helpful to you when you're searching for help online.  We'll cover these in more detail later, but for now, try to Google these terms (possibly including the word "R" next to them) and see if you can discover what they mean in the context of R:
 
@@ -163,18 +181,20 @@ You know the feeling you get when you see a red "Error:" message pop up on your 
 When you get an error or warning in your R console, it is because R is trying to be _helpful_.  It is R's way of saying: "Hi there! It looks like something got messed up here. Here's a helpful hint about what I think went wrong."  So when you see an error, one helpful thing you can do is copy and paste the exact error text into Google to see if you can find an online resource that helps explain what went wrong.
 
 
-### Activity B {.activity}
+### Activity B: Google your errors {.activity}
 
-For example, here's an R expression that yields an error:
+Here's an R expression that yields an error message.  Copy and paste each line of this code into the console in RStudio, then hit **"Enter"** to run the code.  See if you can yield an error message:
 
-```{r}
+```{r, eval=FALSE}
 x <- c("A", "B", "C", "D", "E")
 mean(x)
 ```
 
-Copy and paste the error message into Google and see if you can figure out why R is throwing an error here!
+Now, copy and paste this error message into Google and see if you can figure out why R is throwing an error here!
 
 
 ***
 
-**Acknowledgements:** Thanks to Roxanne Johnson for helping to brainstorm some of the topics in this document!
+### Acknowledgements
+
+Thanks to Roxanne Johnson for helping to brainstorm some of the topics in this document!

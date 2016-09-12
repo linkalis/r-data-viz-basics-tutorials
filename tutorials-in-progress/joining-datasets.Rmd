@@ -1,20 +1,15 @@
 ---
-title: "Joining datasets together"
+title: "Join datasets together"
 author: "Alison Link"
 output: 
   html_document:
-    css: styles.css
+    css: ../styles/styles.css
     fig_caption: false
 ---
 
-Check: Simple time series w/o reshaping?
-
-
 ## rbind & cbind
 
-#### Pro tip: Long vs. wide data {.pro-tip}
 
-ggplot tends to do best with long data
 
 
 ## Left join

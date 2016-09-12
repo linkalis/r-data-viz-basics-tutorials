@@ -1,0 +1,44 @@
+---
+title: "Data Visualization Basics with R"
+author: "Alison Link"
+date: "September 2016"
+output: 
+  html_document:
+    css: styles/styles.css
+---
+
+
+## Table of contents
+
+#### Tutorial 1: [How to think in R](1-how-to-think-in-R/how-to-think-in-R.html)
+
+#### Tutorial 2: [A "first date" with your data in R / RStudio](2-first-date-with-your-data/first-date-data.html)
+
+
+
+## About the tutorials
+
+This is a set of tutorials to help you get you up and running with R and RStudio, and to get you started creating basic data visualizations using R.
+
+At the top of nearly every tutorial you will find a page or chapter reference to a related textbook that may be helpful to consult as you are working through the tutorials: 
+
+* Kaplan, D. (2015). _Data Computing: An Introduction to Wrangling and Visualization with R_. St. Paul, MN: Project MOSAIC Books.
+
+The tutorials also make use of a sample dataset obtained from they City of Minneapolis' public website:
+
+* City of Minneapolis. (2015). _Public/private individual building results for calendar year 2015_ [Dataset]. Retrieved from: http://www.minneapolismn.gov/environment/energy/benchmarking 
+
+You may [download a .CSV of the dataset](datasets/mpls_energy_benchmarking_2015.csv) to use as you work through the tutorials.  (Simply right-click the download link to the left and choose "Save link as..." to save a copy of the dataset to your computer.)   You may also wish to consult the dataset's [codebook](datasets/mpls-energy-benchmarking-codebook.html), which explains the different variables present in the dataset.
+
+
+#### Pro Tip: This is a pro tip {.pro-tip}
+
+Pro tips look like this.  "Pro tips" are small, helpful hints addressing issues or questions that commonly arise for each tutorial topic.  Be sure to read these carefully, as they are intended to help you get "unstuck" and avoid some of the common mistakes you are likely to encounter as you get started learning R for data visualization.
+
+### Activity: This is a sample activity {.activity}
+
+Activities look like this.  The tutorials contain activities which are designed to be completed sequentially as you work through each tutorial.  Be sure to complete these as you go along, as they will help you reinforce your understanding of the topic being covered.   Activities sometimes ask you to incorporate skills learned in previous tutorials, so you may also want to go back and review earlier tutorials if you find yourself getting stuck on a particular activity.
+
+
+
+

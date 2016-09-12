@@ -1,12 +1,20 @@
 ---
 title: "Data wrangling with dplyr data verbs"
 author: "Alison Link"
-date: "July 20, 2016"
+date: "September 2016"
 output: 
   html_document:
-    css: styles.css
+    css: ../styles/styles.css
     fig_caption: false
 ---
+
+### Objectives {.objectives}
+
+* Become familiar with the basic syntax for "wrangling" data with R's dplyr library 
+
+* Learn the basic data verbs ("select", "filter", "mutate", "arrange", "group by", and "summarize") available in the dplyr library and the specific effect they each have when manipulating a dataset
+
+* Practice using dplyr data verbs on data frames to clean, simplify, and compute new summary variables for a dataset
 
 ***
 
@@ -31,7 +39,6 @@ After dplyr is successfully installed, every time you want to use it, just make 
 ```{r, warning=FALSE, message=FALSE}
 library(dplyr)
 ```
-
 
 Now that you have dplyr loaded, let's have another look at our baseball tournament dataset, this time with a few additional players and a few additional variables.  Load the following into your R environment and then we'll start getting acquainted with some ways to wrangle this data using dplyr:
 ```{r}
