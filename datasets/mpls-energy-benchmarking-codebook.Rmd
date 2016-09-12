@@ -1,0 +1,33 @@
+---
+title: "Minneapolis Energy Benchmarking Results Codebook"
+output: pdf_document
+---
+
+
+**Energy Benchmarking:**
+The process of comparing a building’s energy performance to other similar properties, based on a standard metric. ENERGY STAR Portfolio Manager was the software used to benchmark the public buildings in this report, and the metric for comparison is Energy Use Intensity (EUI). 
+
+**Energy Use Intensity (EUI):**
+The metric used for comparing buildings in Energy Star, EUI expresses a building’s energy use relative to its size. In this report it is expressed as kBtu/ft², and is calculated by taking the total energy consumed in a year (in kBtu) and dividing it by the floor area of the building (in ft²). 
+
+**British Thermal Unit (Btu):**
+A unit of energy, which can represent both thermal energy and electricity. One BTU is the amount of energy required to raise one pound of water one degree Fahrenheit. These are some Btu conversions for other units of energy: 1 kWh of electricity = 3413 Btu, 1 therm of natural gas = 100,000 Btu, kBtu = 1,000 Btus, 1 mmBtu = 1,000,000 Btus 
+
+
+
+Variable name                 | Variable type    | Definition
+----------------------------- | ---------------- | ---------------------------------------------------------
+org_name                      | character/string | The name of the organization that owns/manages the building (Note: this information is only available for public buildings; private buildings will be marked as "Private" and will not have an organization name associated with them)
+prop_name                     | character/string | The name of the building/property (Note: this information is only available for public buildings; private buildings will be marked as "Private" and will not have a property name associated with them)
+public_private                | factor           | Whether the building is public or privately-owned.  
+address                       | character/string | The address of the building      
+zip_code                      | factor(?)        | The zip code where the property is located
+prop_type                     | factor           | The type of property
+year_built                    | integer          | The year the building was built
+energy\_star\_score           | integer          | The 1-100 ENERGY STAR score was developed by the Environmental Protection Agency (EPA) and provides a metric for comparison with other similar buildings across the country. The score accounts for differences in climate, occupancy and operating hours. A score of 50 represents median energy performance, while a score of 75 or better indicates a building is a top performer. 
+floor\_area                    | integer          | The building's floor area, measured in square feet, _not_ including floor area dedicated to parking
+floor\_area\_parking          | integer          | The amount of the building's floor area that is dedicated to parking, measured in square feet
+site_EUI                      | numeric          | Site energy represents the amount of heat and electricity consumed by a building as reflected in your utility bills.  This is a relevant metric for facility managers, to understand how a building’s energy use has changed over time. Site EUI does not, however, account for the environmental impacts of transmission and delivery of energy. Site energy sources for public buildings in this report include: electricity, natural gas, chilled water and steam.  Unit of measurement is: kBtu / sq. ft.
+weather\_normalized\_site\_EUI   | numeric | When energy use is adjusted to account for year-to-year weather differences, allowing for comparison of a building to itself over time. Through this procedure, the energy in a given year is adjusted to express the energy that would have been consumed under 30-year average weather conditions. Unit of measurement is: kBtu / sq. ft.
+total\_GHG\_emissions         | numeric          | The metric used in this report for greenhouse gas emissions, which represent a million metric tons of carbon dioxide equivalents. Equivalent CO2 (CO2e) is a universal standard measurement for greenhouse gasses and their ability to trap heat in the atmosphere. These greenhouse gasses include carbon dioxide, methane, nitrous oxide, and chloroflouro-carbons. Greenhouse gas emissions for buildings are calculated using the ENERGY STAR Portfolio Manager Methodology for Greenhouse Gas Inventory and Tracking Calculations.  Unit of measurement is: MtCO2e
+water\_use                     | numeric          | The amount of water the building consumed from all water sources during the annual reporting period.  Unit of measurement is: kgal
