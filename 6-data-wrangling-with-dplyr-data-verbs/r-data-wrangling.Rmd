@@ -20,7 +20,9 @@ output:
 
 **Related to:** _Data Computing_, "Wrangling and Data Verbs", Ch. 7; "More Data Verbs", Ch. 9
 
-***
+[<-- Back to Table of Contents](../index.html){.back-link}
+
+
 
 ## dplyr: R's Swiss Army Knife
 
@@ -236,9 +238,9 @@ By now you may be wondering: _Why is "summarise" spelled with an "s" in the exam
 
 ### Activity B: More data verbs practice {.activity}
 
-Now, it's your turn to try out the dplyr tools on your own!  And this time, we'll return to the data set on energy benchmarking for Minneapolis public and private buildings in the year 2014.  Make sure the .CSV file containing the data is in your R working directory, then load the dataset into your R environment:
+Now, it's your turn to try out the dplyr tools on your own!  And this time, we'll return to the data set on energy benchmarking for Minneapolis public and private buildings in the year 2015.  Make sure the .CSV file containing the data is in your R working directory, then load the dataset into your R environment:
 ```{r}
-data <- read.csv("mpls_benchmarking_2014.csv", header=TRUE, na.strings=c("NA"))
+data <- read.csv("../datasets/mpls_energy_benchmarking_2015.csv", header=TRUE, na.strings=c("N/A", "Not Available", "NA", "0"))
 ```
 
 Using the data you just loaded, write a command using data verbs to address each of the following tasks:
@@ -249,7 +251,7 @@ Using the data you just loaded, write a command using data verbs to address each
 
 3. Group the buildings by property type, and create a new data frame called "avg\_site\_EUI\_by\_prop\_type" showing the **average** site energy use intensity ("site_EUI") for the buildings within each property type.
 
-4. Now, we want to figure out which building has the the lowest greenhouse gas emissions based on its floor area ("floor\_area").  Create a new variable called "GHG\_emissions\_by\_floor\_area" using the following formula: `GHG_emissions_by_floor_area = total_GHG_emissions / floor_area`.  Save this variable as a new column back to the original dataset.  Then, sort the data to find out which building has lowest the greenhouse gas emissions based on its floor area.
+4. Now, we want to figure out which building has the the lowest greenhouse gas emissions based on its floor area ("floor\_area").  Create a new variable called "GHG\_emissions\_per\_floor\_area" using the following formula: `GHG_emissions_per_floor_area = total_GHG_emissions / floor_area`.  Save this variable as a new column back to the original dataset.  Then, sort the data to find out which building has lowest the greenhouse gas emissions based on its floor area.
 
 5. Find the mean Energy Star score across _all_ of the buildings in the dataset.  (Hint: you can find this easily using one of the functions from the "first date" with your data!)  Then, filter the dataset to include _only_ buildings that were built **before** the year 1970 **_and_** that have an Energy Star score that is **greater than** the mean you just calculated.  Save this to a new data frame called "old\_efficient\_buildings".  The result will be a list of buildings that are older than 1970, but that have a higher-than-average Energy Star score.
 

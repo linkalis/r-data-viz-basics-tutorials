@@ -16,10 +16,12 @@ output:
 
 * Create a data frame "from scratch" by creating vectors containing different data types and combining them into a single data frame
 
-
 ***
 
 **Related to:** _Data Computing_ p. 29
+
+[<-- Back to Table of Contents](../index.html){.back-link}
+
 
 
 ## Data structures: The "building blocks" of R

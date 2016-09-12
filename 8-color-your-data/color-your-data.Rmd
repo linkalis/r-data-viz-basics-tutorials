@@ -16,6 +16,9 @@ output:
 
 * Experiment with using both `col=` and `fill=` to add color using ggplot, and understand how they alter the resulting graphic
 
+[<-- Back to Table of Contents](../index.html){.back-link}
+
+
 
 ## Use color to add additional variables or emphasis to graphics
 

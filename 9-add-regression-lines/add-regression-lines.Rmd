@@ -18,6 +18,9 @@ output:
 
 **Related to:** _Data Computing_, "Collective Properties of Cases", Ch. 14
 
+[<-- Back to Table of Contents](../index.html){.back-link}
+
+
 
 ## Linear regression lines
 

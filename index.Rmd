@@ -14,6 +14,21 @@ output:
 
 #### Tutorial 2: [A "first date" with your data in R / RStudio](2-first-date-with-your-data/first-date-data.html)
 
+#### Tutorial 3: [Arguments, functions, and R computing basics](3-arguments-functions-computing-basics/arguments-functions-computing-basics.html)
+
+#### Tutorial 4: [A "second date" with your data in R / RStudio](4-second-date-with-your-data/second-date-data.html)
+
+#### Tutorial 5: [R data structures and types](5-data-structures-and-types/r-data-structures-and-types.html)
+
+#### Tutorial 6: [Data wrangling with dplyr data verbs](6-data-wrangling-with-dplyr-data-verbs/r-data-wrangling.html)
+
+#### Tutorial 7: [The grammar of ggplot graphics](7-grammar-of-graphics-ggplot/grammar-of-graphics-ggplot.html)
+
+#### Tutorial 8: [Color your data](8-color-your-data/color-your-data.html)
+
+#### Tutorial 9: [Add regression lines to ggplots](9-add-regression-lines/add-regression-lines.html)
+
+#### Tutorial 10: [Find and clean your data](10-finding-cleaning-data/finding-cleaning-data.html)
 
 
 ## About the tutorials
@@ -28,7 +43,15 @@ The tutorials also make use of a sample dataset obtained from they City of Minne
 
 * City of Minneapolis. (2015). _Public/private individual building results for calendar year 2015_ [Dataset]. Retrieved from: http://www.minneapolismn.gov/environment/energy/benchmarking 
 
-You may [download a .CSV of the dataset](datasets/mpls_energy_benchmarking_2015.csv) to use as you work through the tutorials.  (Simply right-click the download link to the left and choose "Save link as..." to save a copy of the dataset to your computer.)   You may also wish to consult the dataset's [codebook](datasets/mpls-energy-benchmarking-codebook.html), which explains the different variables present in the dataset.
+You will want to download a .CSV copy of the dataset to use as you work through the tutorials, along with the codebook explaining the different variables present in the dataset.  You can also download an audio interview explaining the story behind this dataset and discussing some of the variables, sources of error, and interesting questions you'll encounter when working with this data:
+
+* Minneapolis Energy Benchmarking - [2015 Dataset (.CSV)](datasets/mpls_energy_benchmarking_2015.csv)
+
+* Minneapolis Energy Benchmarking - [Codebook (.PDF)](datasets/mpls-energy-benchmarking-codebook.pdf)
+
+* Minneapolis Energy Benchmarking - [Audio Interview (.MP3)](datasets/mpls_energy_benchmarking_interview.mp3) / [(.OGG)](datasets/mpls_energy_benchmarking_interview.ogg)
+
+Simply right-click the links above and choose "Save link as..." to save a copy of these files to your computer.
 
 
 #### Pro Tip: This is a pro tip {.pro-tip}
@@ -38,7 +61,3 @@ Pro tips look like this.  "Pro tips" are small, helpful hints addressing issues 
 ### Activity: This is a sample activity {.activity}
 
 Activities look like this.  The tutorials contain activities which are designed to be completed sequentially as you work through each tutorial.  Be sure to complete these as you go along, as they will help you reinforce your understanding of the topic being covered.   Activities sometimes ask you to incorporate skills learned in previous tutorials, so you may also want to go back and review earlier tutorials if you find yourself getting stuck on a particular activity.
-
-
-
-

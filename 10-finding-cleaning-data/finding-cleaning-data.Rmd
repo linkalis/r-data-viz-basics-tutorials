@@ -20,6 +20,9 @@ output:
 
 **Related to:** _Data Computing_, "Tidy Data", Ch. 1; "From Strings to Numbers", p. 131; "Factors or Strings?", p. 133; "Wide versus Narrow Data Layouts", Ch. 11
 
+[<-- Back to Table of Contents](../index.html){.back-link}
+
+
 
 ## Find yourself some data
 

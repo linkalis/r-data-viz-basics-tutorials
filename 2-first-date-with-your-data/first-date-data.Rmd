@@ -18,6 +18,8 @@ output:
 
 **Related to:** _Data Computing_, "Tidy Data", p. 9; "Files and Documents", Ch. 4; "Introduction to Data Graphics", p. 47-48
 
+[<-- Back to Table of Contents](../index.html){.back-link}
+
 
 ## Exploratory analysis is like a blind date
 

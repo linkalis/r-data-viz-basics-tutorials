@@ -20,7 +20,8 @@ output:
 
 **Related to:** _Data Computing_, "Frames, Glyphs, and other Components of Graphics", Ch. 6; "Graphics and Their Grammar", Ch. 8
 
-***
+[<-- Back to Table of Contents](../index.html){.back-link}
+
 
 ## ggplot: R's graphical "sandwich artist"
 Have you ever admired the "sandwich artists" who so skillfully put together your sandwich at Subway?  Have you ever wanted to learn how to create and serve up graphics that are a feast for the eyes and as tasty as your favorite sub sandwich?  Well, today's your lucky day!  Pull on your latex gloves and get ready to become a "sandwich"...erm... "graphics" artist!

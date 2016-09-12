@@ -20,6 +20,8 @@ output:
 
 **Related to:** _Data Computing_, "Functions, Arguments and Commands", p. 21; "R Command Patterns", Ch. 3
 
+[<-- Back to Table of Contents](../index.html){.back-link}
+
 
 ## Functions are R's "recipes" for your data
 

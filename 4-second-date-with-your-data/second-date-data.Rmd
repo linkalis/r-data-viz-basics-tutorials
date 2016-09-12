@@ -18,6 +18,7 @@ output:
 
 **Related to:** _Data Computing_, "Introduction to Data Graphics", Ch. 5
 
+[<-- Back to Table of Contents](../index.html){.back-link}
 
 
 ## Time to check out your data's "profile pictures"!
